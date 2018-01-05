@@ -1,0 +1,30 @@
+{
+  "name": "group_project",
+  "version": "1.0.0",
+  "description": "Created a github repo for our group project at CodeClan",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha specs",
+    "start": "node server.js",
+    "build": "webpack -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yoni-Satat/js-group-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yoni-Satat/js-group-project/issues"
+  },
+  "homepage": "https://github.com/Yoni-Satat/js-group-project#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongodb": "^3.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^4.1.0",
+    "webpack": "^3.10.0"
+  }
+}
