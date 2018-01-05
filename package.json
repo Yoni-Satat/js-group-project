@@ -2,7 +2,7 @@
   "name": "group_project",
   "version": "1.0.0",
   "description": "Created a github repo for our group project at CodeClan",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha specs",
     "start": "node server.js",
