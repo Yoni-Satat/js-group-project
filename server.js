@@ -1,6 +1,7 @@
 const express = require('express');
 const parser = require('body-parser');
 const server = express();
+const path = require('path');
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -14,10 +15,12 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
     return;
   }
 
+  server.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname + '/client/public/index.html'));
+  });
+
   const db = client.db('saved-routes');
   console.log('Connected to database');
-
-
 
   server.post('/routes', function(req, res) {
     db.collection('routes').insert(req.body, function(err, result) {
@@ -30,6 +33,17 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
       console.log('Saved to database');
       res.status(201);
       res.json(result.ops[0]);
+    });
+  });
+
+  server.get('/routes', function(req, res) {
+    db.collection('routes').find().toArray(function(err, result) {
+      if(err) {
+        console.log(err);
+        res.status(500);
+        res.send();
+      }
+      res.json(result);
     });
   });
 
