@@ -1,3 +1,5 @@
+
+
 const app = function() {
 
   const homeButton = document.querySelector('#home');
@@ -10,7 +12,7 @@ const app = function() {
   // <button type="button" name="about"></button>
   // <button type="button" name="explore"></button>
 
-
   console.log('END OF APP');
 }
+
 document.addEventListener('DOMContentLoaded', app);
