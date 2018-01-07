@@ -92,21 +92,10 @@ const app = function() {
     console.log('clicked');
   });
 
+  
 
 
 
-  //
-
-
-  // const homeButtonClicked = function () {
-  //   // here requests will need to get another page.
-  //   console.log('home clicked');
-  // }
-  //
-  // const listViewButtonClicked = function () {
-  //   // here requests will need to get another page.
-  //   console.log('home clicked');
-  // }
 
 
 
