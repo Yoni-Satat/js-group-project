@@ -1,4 +1,4 @@
-var MapWrapper = function (container, coords, zoom) {
+const MapWrapper = function (container, coords, zoom) {
   this.googleMap = new google.maps.Map(container, {
     center: coords,
     zoom: zoom
@@ -38,3 +38,5 @@ MapWrapper.prototype.geoLocate = function () {
     this.addMarker(center);
   }.bind(this));
 }
+
+module.exports = MapWrapper;

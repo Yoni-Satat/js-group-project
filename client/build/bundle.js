@@ -68,6 +68,15 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 const Request = __webpack_require__(1);
+const MapWrapper = __webpack_require__(2);
+
+const container = document.querySelector('#container');
+const center = {
+  lat: 55.946962,
+  lng: -3.20195
+}
+const map = new MapWrapper(container, center, 19);
+
 
 
 const app = function() {
@@ -85,6 +94,9 @@ const app = function() {
   const exploreButton = document.querySelector('#explore');
   exploreButton.addEventListener('click', function() {
     console.log('clicked');
+
+
+
   });
 
   const listViewButton = document.querySelector('#list-view');
@@ -92,7 +104,7 @@ const app = function() {
     console.log('clicked');
   });
 
-  
+
 
 
 
@@ -161,6 +173,54 @@ Request.prototype.delete = function(callback) {
 };
 
 module.exports = Request;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+const MapWrapper = function (container, coords, zoom) {
+  this.googleMap = new google.maps.Map(container, {
+    center: coords,
+    zoom: zoom
+  });
+}
+
+MapWrapper.prototype.addMarker = function (coords) {
+  var marker = new google.maps.Marker({
+    position: coords,
+    map: this.googleMap,
+    animation: google.maps.Animation.DROP
+  });
+  return marker;
+}
+
+MapWrapper.prototype.addClickEvent = function () {
+  google.maps.event.addListener(this.googleMap, 'click', function (event) {
+    var position = { lat: event.latLng.lat(), lng: event.latLng.lng() }
+    this.addMarker(position);
+  }.bind(this));
+}
+
+MapWrapper.prototype.addInfoWindow = function (coords, text) {
+  var marker = this.addMarker(coords);
+  marker.addListener('click', function () {
+    var infoWindow = new google.maps.InfoWindow({
+      content: text
+    });
+    infoWindow.open(this.map, marker);
+  });
+}
+
+MapWrapper.prototype.geoLocate = function () {
+  navigator.geolocation.getCurrentPosition(function (position) {
+    var center = { lat: position.coords.latitude, lng: position.coords.longitude };
+    this.googleMap.setCenter(center);
+    this.addMarker(center);
+  }.bind(this));
+}
+
+module.exports = MapWrapper;
 
 
 /***/ })
