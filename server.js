@@ -15,13 +15,13 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
     return;
   }
 
-  const db = client.db('list');
+  const db = client.db('routes');
 
   console.log("connect to database");
 
-  server.post('/api/bucketlist', function(req, res) {
+  server.post('/api/routes', function(req, res) {
 
-    db.collection('bucketlist').insert( req.body, function(err, result) {
+    db.collection('fav_routes').insert( req.body, function(err, result) {
       if(err) {
         console.log(err);
         res.status(500);
@@ -35,9 +35,9 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
     });
   });
 
-  server.get('/api/bucketlist', function(req, res) {
+  server.get('/api/routes', function(req, res) {
 
-    db.collection('bucketlist').find().toArray(function(err, result) {
+    db.collection('fav_routes').find().toArray(function(err, result) {
       if(err) {
         console.log(err);
         res.status(500);
@@ -51,9 +51,9 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
   });
 
 
-  server.delete('/api/bucketlist', function(req, res) {
+  server.delete('/api/routes', function(req, res) {
 
-    db.collection('bucketlist').remove({}, function(err, result) {
+    db.collection('fav_routes').remove({}, function(err, result) {
       if(err) {
         console.log(err);
         res.status(500);
