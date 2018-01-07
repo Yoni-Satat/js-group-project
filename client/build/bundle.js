@@ -73,21 +73,40 @@ const Request = __webpack_require__(1);
 const app = function() {
 
   const homeButton = document.querySelector('#home');
-  homeButton.addEventListener('click', homeButtonClicked);
+  homeButton.addEventListener('click', function() {
+    console.log('clicked');
+  });
 
-  const listViewButton = document.querySelector('#list-view');
-  homeButton.addEventListener('click', homeButtonClicked);
-
-  const aboutButton = document.querySelector('#home');
-  homeButton.addEventListener('click', homeButtonClicked);
+  const aboutButton = document.querySelector('#about');
+  aboutButton.addEventListener('click', function() {
+    console.log('clicked');
+  });
 
   const exploreButton = document.querySelector('#explore');
-  homeButton.addEventListener('click', homeButtonClicked);
+  exploreButton.addEventListener('click', function() {
+    console.log('clicked');
+  });
 
-  const homeButtonClicked = function () {
-    // here requests will need to get another page.
-    console.log('home clicked');
-  }
+  const listViewButton = document.querySelector('#list-view');
+  listViewButton.addEventListener('click', function() {
+    console.log('clicked');
+  });
+
+
+
+
+  //
+
+
+  // const homeButtonClicked = function () {
+  //   // here requests will need to get another page.
+  //   console.log('home clicked');
+  // }
+  //
+  // const listViewButtonClicked = function () {
+  //   // here requests will need to get another page.
+  //   console.log('home clicked');
+  // }
 
 
 
