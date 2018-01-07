@@ -15,40 +15,59 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
     return;
   }
 
-  server.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/client/public/index.html'));
-  });
+  const db = client.db('list');
 
-  const db = client.db('saved-routes');
-  console.log('Connected to database');
+  console.log("connect to database");
 
-  server.post('/routes', function(req, res) {
-    db.collection('routes').insert(req.body, function(err, result) {
+  server.post('/api/bucketlist', function(req, res) {
+
+    db.collection('bucketlist').insert( req.body, function(err, result) {
       if(err) {
         console.log(err);
         res.status(500);
         res.send();
         return;
       }
+
       console.log('Saved to database');
       res.status(201);
       res.json(result.ops[0]);
     });
   });
 
-  server.get('/routes', function(req, res) {
-    db.collection('routes').find().toArray(function(err, result) {
+  server.get('/api/bucketlist', function(req, res) {
+
+    db.collection('bucketlist').find().toArray(function(err, result) {
       if(err) {
         console.log(err);
         res.status(500);
         res.send();
+        return;
       }
+
       res.json(result);
     });
+
   });
 
-  server.listen(3000, function () {
-    console.log('Listening on port 3000');
+
+  server.delete('/api/bucketlist', function(req, res) {
+
+    db.collection('bucketlist').remove({}, function(err, result) {
+      if(err) {
+        console.log(err);
+        res.status(500);
+        res.send();
+        return;
+      }
+
+      res.status(204);
+      res.send();
+    });
+
   });
-  //END
+
+  server.listen(3000, function(){
+    console.log("Listening on port 3000");
+  });
 });
