@@ -65,9 +65,95 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const Request = __webpack_require__(1);
+
+
+const app = function() {
+
+  const homeButton = document.querySelector('#home');
+  homeButton.addEventListener('click', homeButtonClicked);
+
+  const listViewButton = document.querySelector('#list-view');
+  homeButton.addEventListener('click', homeButtonClicked);
+
+  const aboutButton = document.querySelector('#home');
+  homeButton.addEventListener('click', homeButtonClicked);
+
+  const exploreButton = document.querySelector('#explore');
+  homeButton.addEventListener('click', homeButtonClicked);
+
+  const homeButtonClicked = function () {
+    // here requests will need to get another page.
+    console.log('home clicked');
+  }
+
+
+
+  // <button type="button" name="home"></button>
+  // <button type="button" name="list-view"></button>
+  // <button type="button" name="about"></button>
+  // <button type="button" name="explore"></button>
+
+  console.log('END OF APP');
+}
+
+document.addEventListener('DOMContentLoaded', app);
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports) {
 
-throw new Error("Module parse failed: Unexpected token (18:1)\nYou may need an appropriate loader to handle this file type.\n|   exploreButton.addEventListener('click', exploreButtonClicked);\n| \n| });\n| \n|   // <button type=\"button\" name=\"home\"></button>");
+const Request = function(url) {
+  this.url = url;
+  this.responseBody = [];
+}
+
+Request.prototype.get = function(callback) {
+  const request = new XMLHttpRequest();
+  request.open('GET', this.url);
+  request.addEventListener('load', function() {
+    if (this.status !== 200){
+      return;
+    };
+    this.responseBody = JSON.parse(this.responseText);
+    console.log("responseBody", this.responseBody);
+    callback(this.responseBody);
+  });
+  request.send();
+};
+
+Request.prototype.post = function(callback, body) {
+  const request = new XMLHttpRequest();
+  request.open('POST', this.url);
+
+  request.setRequestHeader('Content-Type', 'application/json');
+  request.addEventListener('load', function() {
+    if (this.status!==201) {
+      return;
+    };
+    const responseBody = JSON.parse(this.responseText);
+    callback(responseBody);
+  });
+  request.send(JSON.stringify(body));
+};
+
+Request.prototype.delete = function(callback) {
+  const request = new XMLHttpRequest();
+  request.open('DELETE', this.url);
+  request.addEventListener('load', function() {
+    if (this.status!==204) {
+      return;
+    };
+    callback();
+  });
+  request.send();
+};
+
+module.exports = Request;
+
 
 /***/ })
 /******/ ]);

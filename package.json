@@ -22,12 +22,11 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongodb": "^3.0.1",
-    "nodemon": "^1.14.8"
+    "nodemon": "^1.14.8",
+    "webpack": "^3.10.0"
 
   },
   "devDependencies": {
-    "mocha": "^4.1.0",
-    "webpack": "^3.10.0"
-
+    "mocha": "^4.1.0"
   }
 }

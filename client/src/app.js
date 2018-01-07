@@ -4,18 +4,23 @@ const Request = require('./services/request.js');
 const app = function() {
 
   const homeButton = document.querySelector('#home');
-  homeButton.addEventListener('click', hoomeButtonClicked);
+  homeButton.addEventListener('click', homeButtonClicked);
 
   const listViewButton = document.querySelector('#list-view');
-  listViewButton.addEventListener('click', listViewButtonClicked);
+  homeButton.addEventListener('click', homeButtonClicked);
 
-  const aboutButton = document.querySelector('#about');
-  aboutButton.addEventListener('click', aboutButtonClicked);
+  const aboutButton = document.querySelector('#home');
+  homeButton.addEventListener('click', homeButtonClicked);
 
   const exploreButton = document.querySelector('#explore');
-  exploreButton.addEventListener('click', exploreButtonClicked);
+  homeButton.addEventListener('click', homeButtonClicked);
 
-});
+  const homeButtonClicked = function () {
+    // here requests will need to get another page.
+    console.log('home clicked');
+  }
+
+
 
   // <button type="button" name="home"></button>
   // <button type="button" name="list-view"></button>
