@@ -2,11 +2,11 @@
   "name": "group_project",
   "version": "1.0.0",
   "description": "Created a github repo for our group project at CodeClan",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha specs",
     "start": "node server.js",
-    "build": "webpack -w"
+    "build": "cd client && webpack -w"
   },
   "repository": {
     "type": "git",
@@ -21,10 +21,13 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "mongodb": "^3.0.1"
+    "mongodb": "^3.0.1",
+    "nodemon": "^1.14.8"
+
   },
   "devDependencies": {
     "mocha": "^4.1.0",
     "webpack": "^3.10.0"
+
   }
 }
