@@ -33,6 +33,12 @@ const app = function() {
 
     goButton.addEventListener('click', function() {
       console.log('clicked');
+      const container = document.querySelector('#container');
+      const center = {
+        lat: 55.946962,
+        lng: -3.20195
+      }
+      const map = new MapWrapper(container, center, 19);
     });
   };
 
