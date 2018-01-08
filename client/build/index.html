@@ -3,7 +3,7 @@
   <head>
     <title>Map</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTb8j4lCQsWmWFJ6DPtHjtOY7JB_37e0o&libraries=places&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTb8j4lCQsWmWFJ6DPtHjtOY7JB_37e0o&libraries=places"></script>
 
 
 
@@ -26,8 +26,7 @@
     <div id="floating-panel">
 <b>Start: </b>
 <select id="start">
-  <option value="chicago, il">Chicago</option>
-  <option value="edinburgh, scotland">Edinburgh</option>
+  <option value="Scott Monument, Edinburgh, United Kingdom">Edinburgh</option>
   <option value="joplin, mo">Joplin, MO</option>
   <option value="oklahoma city, ok">Oklahoma City</option>
   <option value="amarillo, tx">Amarillo</option>
@@ -41,7 +40,7 @@
 </select>
 <b>End: </b>
 <select id="end">
-  <option value="chicago, il">Chicago</option>
+  <option value="Glasgow Road, Ratho Station, United Kingdom">Ratho</option>
   <option value="st louis, mo">St Louis</option>
   <option value="joplin, mo">Joplin, MO</option>
   <option value="oklahoma city, ok">Oklahoma City</option>
@@ -55,7 +54,21 @@
   <option value="los angeles, ca">Los Angeles</option>
 </select>
 </div>
+<div class="pac-card" id="pac-card">
+  <div>
+    <div id="title">
+      Autocomplete search
+    </div>
+    <div id="pac-container">
+      <input id="pac-input" type="text" placeholder="Enter a location">
+    </div>
+  </div>
 <div id="map"></div>
+<div id="infowindow-content">
+   <img src="" width="16" height="16" id="place-icon">
+   <span id="place-name"  class="title"></span><br>
+   <span id="place-address"></span>
+ </div>
 
 <!-- <input type="text" name="destination" value="">
 <p>From my location</p>
