@@ -1,4 +1,13 @@
 const Request = require('./services/request.js');
+const MapWrapper = require('./views/mapWrapper.js');
+
+const container = document.querySelector('#container');
+const center = {
+  lat: 55.946962,
+  lng: -3.20195
+}
+const map = new MapWrapper(container, center, 19);
+
 
 
 const app = function() {
@@ -16,6 +25,9 @@ const app = function() {
   const exploreButton = document.querySelector('#explore');
   exploreButton.addEventListener('click', function() {
     console.log('clicked');
+
+
+
   });
 
   const listViewButton = document.querySelector('#list-view');
@@ -26,18 +38,7 @@ const app = function() {
 
 
 
-  //
 
-
-  // const homeButtonClicked = function () {
-  //   // here requests will need to get another page.
-  //   console.log('home clicked');
-  // }
-  //
-  // const listViewButtonClicked = function () {
-  //   // here requests will need to get another page.
-  //   console.log('home clicked');
-  // }
 
 
 
