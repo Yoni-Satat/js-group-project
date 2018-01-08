@@ -9,8 +9,11 @@ const app = function() {
 
   const homeFunction = function () {
 
+
     console.log('clicked');
     const container = document.querySelector('#container');
+    container.innerHTML = "";
+
     const destinationInput = document.createElement('input');
     const feildLabel = document.createElement('label');
     feildLabel.innerText = 'destination';
@@ -65,7 +68,7 @@ const app = function() {
         directionsService.route({
           origin: document.getElementById('start').value,
           destination: document.getElementById('end').value,
-          travelMode: 'DRIVING'
+          travelMode: 'BICYCLING'
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
@@ -85,12 +88,19 @@ const app = function() {
   const exploreFunction = function () {
     console.log('clicked');
     const container = document.querySelector('#container');
+    container.innerHTML = "";
     const center = {
       lat: 55.946962,
       lng: -3.20195
     }
     const map = new MapWrapper(container, center, 19);
   };
+
+  const resetContainer = function () {
+    const container = document.querySelector('#container').innerHTML = "";
+    console.log('reset called');
+
+  }
 
 
 
