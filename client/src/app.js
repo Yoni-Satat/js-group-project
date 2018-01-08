@@ -19,6 +19,17 @@ const app = function() {
     container.appendChild(feildLabel);
     container.appendChild(destinationInput);
 
+    const locationLabel = document.createElement('label');
+    locationLabel.innerText = 'From My Location';
+    const checkBox = document.createElement('input');
+    checkBox.type = 'checkbox';
+    container.appendChild(locationLabel);
+    container.appendChild(checkBox);
+
+    const goButton = document.createElement('button');
+    goButton.innerText = 'Go';
+    container.appendChild(goButton);
+
   });
 
   const aboutButton = document.querySelector('#about');
