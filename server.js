@@ -80,6 +80,20 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
     });
   });
 
+  server.delete('/api/routes/:id', function(req, res) {
+    db.collection('fav_routes').deleteOne({_id: new ObjectID(req.params.id)}, function(err, success) {
+      if(err) {
+        console.log(err);
+        res.status(500);
+        res.send();
+        return;
+      }
+
+      res.status(204);
+      res.send();
+    });
+  });
+
   server.put('/api/routes', function(req, res) {
 
     db.collection('fav_routes').update({_id: new ObjectID(req.params.id)}, {$set: {title: "Andre", done: true }}, function(err, success) {
