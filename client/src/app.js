@@ -7,10 +7,7 @@ const MapWrapper = require('./views/mapWrapper.js');
 
 const app = function() {
 
-
-
-  const homeButton = document.querySelector('#home');
-  homeButton.addEventListener('click', function() {
+  const homeFunction = function () {
     console.log('clicked');
     const container = document.querySelector('#container');
     const destinationInput = document.createElement('input');
@@ -29,16 +26,9 @@ const app = function() {
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
     container.appendChild(goButton);
+  };
 
-  });
-
-  const aboutButton = document.querySelector('#about');
-  aboutButton.addEventListener('click', function() {
-    console.log('clicked');
-  });
-
-  const exploreButton = document.querySelector('#explore');
-  exploreButton.addEventListener('click', function() {
+  const exploreFunction = function () {
     console.log('clicked');
     const container = document.querySelector('#container');
     const center = {
@@ -46,10 +36,20 @@ const app = function() {
       lng: -3.20195
     }
     const map = new MapWrapper(container, center, 19);
+  };
 
 
 
+  const homeButton = document.querySelector('#home');
+  homeButton.addEventListener('click', homeFunction);
+
+  const aboutButton = document.querySelector('#about');
+  aboutButton.addEventListener('click', function() {
+    console.log('clicked');
   });
+
+  const exploreButton = document.querySelector('#explore');
+  exploreButton.addEventListener('click', exploreFunction);
 
   const listViewButton = document.querySelector('#list-view');
   listViewButton.addEventListener('click', function() {
@@ -58,15 +58,6 @@ const app = function() {
 
 
 
-
-
-
-
-
-  // <button type="button" name="home"></button>
-  // <button type="button" name="list-view"></button>
-  // <button type="button" name="about"></button>
-  // <button type="button" name="explore"></button>
 
   console.log('END OF APP');
 }
