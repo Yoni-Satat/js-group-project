@@ -64,7 +64,20 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
       res.status(204);
       res.send();
     });
+  });
 
+  server.deleteById('/api/routes/:id', function(req, res) {
+    db.collection('fav_routes').deleteOne({_id: new ObjectID(req.params.id)}, function(err, success) {
+      if(err) {
+        console.log(err);
+        res.status(500);
+        res.send();
+        return;
+      }
+
+      res.status(204);
+      res.send();
+    });
   });
 
   server.listen(3000, function(){
