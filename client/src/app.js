@@ -45,8 +45,11 @@ const app = function() {
       }
       const map = new MapWrapper(container, center, 19);
       directionsDisplay.setMap(map);
+      // need to define what the pannel is ??
       directionsDisplay.setPanel(document.getElementById('panel'));
 
+
+      // need to make the request dynamically populated by the input boxes 
       var request = {
         origin: 'Chicago',
         destination: 'New York',
