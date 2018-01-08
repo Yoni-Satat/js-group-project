@@ -35,35 +35,52 @@ const app = function() {
     goButton.addEventListener('click', function() {
       console.log('clicked');
 
-      var directionsService = new google.maps.DirectionsService();
-      var directionsDisplay = new google.maps.DirectionsRenderer();
 
-      const container = document.querySelector('#container');
-      const center = {
-        lat: 55.946962,
-        lng: -3.20195
-      }
-      const map = new MapWrapper(container, center, 19);
-      directionsDisplay.setMap(map);
+
+      // const container = document.querySelector('#container');
+      // const center = {
+      //   lat: 55.946962,
+      //   lng: -3.20195
+      // }
+      // const map = new MapWrapper(container, center, 15);
       // need to define what the pannel is ??
-      directionsDisplay.setPanel(document.getElementById('panel'));
 
 
-      // need to make the request dynamically populated by the input boxes 
-      var request = {
-        origin: 'Chicago',
-        destination: 'New York',
-        travelMode: google.maps.DirectionsTravelMode.DRIVING
-      };
-
-      directionsService.route(request, function(response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-          directionsDisplay.setDirections(response);
-        }
+      var directionsService = new google.maps.DirectionsService;
+      var directionsDisplay = new google.maps.DirectionsRenderer;
+      var map = new google.maps.Map(document.querySelector('#container'), {
+        zoom: 7,
+        center: {lat: 41.85, lng: -87.65}
       });
-    });
-  }
+      directionsDisplay.setMap(map);
 
+      var onChangeHandler = function() {
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+      };
+      document.getElementById('start').addEventListener('change', onChangeHandler);
+      document.getElementById('end').addEventListener('change', onChangeHandler);
+
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        directionsService.route({
+          origin: document.getElementById('start').value,
+          destination: document.getElementById('end').value,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+
+
+      // need to make the request dynamically populated by the input boxes
+
+    });
+
+  }
 
   const exploreFunction = function () {
     console.log('clicked');
@@ -99,5 +116,6 @@ const app = function() {
   console.log('END OF APP');
 
 }
+
 
 document.addEventListener('DOMContentLoaded', app);
