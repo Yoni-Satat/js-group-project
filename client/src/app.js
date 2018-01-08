@@ -26,6 +26,14 @@ const app = function() {
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
     container.appendChild(goButton);
+
+    checkBox.addEventListener('click', function() {
+      console.log('checked');
+    });
+
+    goButton.addEventListener('click', function() {
+      console.log('clicked');
+    });
   };
 
   const exploreFunction = function () {
