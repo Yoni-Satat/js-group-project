@@ -12,6 +12,13 @@ const app = function() {
   const homeButton = document.querySelector('#home');
   homeButton.addEventListener('click', function() {
     console.log('clicked');
+    const container = document.querySelector('#container');
+    const destinationInput = document.createElement('input');
+    const feildLabel = document.createElement('label');
+    feildLabel.innerText = 'destination';
+    container.appendChild(feildLabel);
+    container.appendChild(destinationInput);
+
   });
 
   const aboutButton = document.querySelector('#about');
