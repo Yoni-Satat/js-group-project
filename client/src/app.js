@@ -22,10 +22,10 @@ const app = function() {
     const lineBreakTwo = document.createElement('br');
 
     const destinationInput = document.createElement('input');
-    // destinationInput.id = "destination-input"
+    destinationInput.id = "destination-input"
     const feildLabel = document.createElement('label');
     feildLabel.innerText = 'destination';
-    feildLabel.id = 'destination-input'
+    // feildLabel.id = 'destination-input';
     const locationLabel = document.createElement('label');
     locationLabel.innerText = 'From My Location';
     locationLabel.id = 'destination-label';
@@ -34,15 +34,15 @@ const app = function() {
     homeForm.appendChild(feildLabel);
     homeForm.appendChild(destinationInput);
     homeForm.appendChild(lineBreak);
-    homeForm.appendChild(locationLabel);
-    homeForm.appendChild(checkBox);
+    // homeForm.appendChild(locationLabel);
+    // homeForm.appendChild(checkBox);
 
     autoComplete.autoCompleteBox(destinationInput);
 
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
     goButton.id ='goButton';
-    goButton.class = 'blue';
+    goButton.className = 'hvr-underline-from-center';
     homeForm.appendChild(lineBreakTwo);
     homeForm.appendChild(goButton);
 

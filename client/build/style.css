@@ -1,5 +1,13 @@
+body {
+font-family: 'Scope One', serif;
+
+  text-align: center;
+  margin: 2%;
+}
+
 
 h1 {
+  font-family: 'Lora', serif;
   text-align: center;
   margin: 2%;
 }
@@ -8,22 +16,33 @@ h1 {
 
 
 nav {
+  border-style: solid;
+  border-width: thick;
+  border-color: red;
   display: flex;
-  background-color: teal;
+  border-width: medium;
   width: 100%;
   justify-content: center;
   margin-bottom: 20px;
 }
 
+#destination-input {
+  margin-left: 5px;
+  width: 60%;
+}
+
 #home-form button {
   display: flex;
+  align-items: center;
+  text-align: center;
+  color: red;
 }
 
 #home-form{
   margin-top: auto;
   font-size: 20px;
-  background-color: blue;
-  width: 30%;
+  /*background-color: blue;*/
+  width: 60%;
   justify-content: center;
   margin: auto;
   margin-top: 5%;
@@ -35,9 +54,10 @@ button {
   margin: 10px;
   width: 20%;
   height: 30px;
-  align-self: center;
-
+  /*align-self: center;*/
 }
+
+
 
 #goButton {
   display: flex;
@@ -45,7 +65,6 @@ button {
  color: purple;
   align-content: center;
   align-self: center;
-
 }
 
 #container {
@@ -106,4 +125,34 @@ button {
   transform: scaleX(1);
   -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
   transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+
+.hvr-underline-from-center {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  overflow: hidden;
+}
+.hvr-underline-from-center:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  background: #2098D1;
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {
+  left: 0;
+  right: 0;
 }
