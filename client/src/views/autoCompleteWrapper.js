@@ -5,6 +5,12 @@ const AutoComplete = function (map) {
   this.map = map;
 }
 
+AutoComplete.prototype.autoCompleteBox = function (selectedId) {
+  var autocomplete = new google.maps.places.Autocomplete(selectedId);
+  return autocomplete;
+}
+
+
 
 function initMap() {
   // var map = new google.maps.Map(document.getElementById('map'), {
@@ -93,3 +99,5 @@ function initMap() {
   //   autocomplete.setOptions({strictBounds: this.checked});
   // });
 }
+
+module.exports = AutoComplete;
