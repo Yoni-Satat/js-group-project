@@ -50,6 +50,32 @@ const app = function() {
     });
   }
 
+  const displayRoutes = function () {
+    const container = document.querySelector('#container');
+    const ulDisplayRoutes = document.createElement('ul');
+    container.innerHTML = "";
+
+    const request = new Request('http://localhost:3000/api/routes');
+
+    request.get(function(savedRoutes) {
+      savedRoutes.forEach(function(route) {
+        const liStart = document.createElement('li');
+        liStart.innerText = route.start;
+        const liEnd = document.createElement('li');
+        liEnd.innerText = route.end;
+        const line = document.createElement('hr');
+        container.appendChild(ulDisplayRoutes);
+        ulDisplayRoutes.appendChild(liStart);
+        ulDisplayRoutes.appendChild(liEnd);
+        liEnd.appendChild(line);
+      });
+
+    });
+
+
+
+  }
+
   const exploreFunction = function () {
     console.log('clicked');
     const container = document.querySelector('#container');
@@ -80,6 +106,8 @@ const app = function() {
   const listViewButton = document.querySelector('#list-view');
   listViewButton.addEventListener('click', function() {
     console.log('clicked');
+    displayRoutes();
+
   });
 
   const saveRouteButton = document.querySelector('#save-route');
@@ -91,7 +119,7 @@ const app = function() {
     const route = new Route(null, null, start, finish);
     const request = new Request('http://localhost:3000/api/routes');
 
-    request.post(function(addedEntity) {  
+    request.post(function(addedEntity) {
     }, route);
 
   });
