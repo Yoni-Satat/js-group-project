@@ -109,20 +109,22 @@ const app = function() {
 
   const saveRouteButton = document.querySelector('#save-route');
   saveRouteButton.addEventListener('click', function() {
-		// mapWrapper.geoLocate(function(geoLocation){
-		// 	const map = mapWrapper.newMap(container, geoLocation, 7);
-		// 	directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
-		// });
-    const start = document.getElementById('start').value;
-    const finish = destinationInput.value;
+		const addressRequest = new Request('https://maps.googleapis.com/maps/api/geocode/json?latlng=55.946842,-3.2016552&key=AIzaSyAobv2IGaN5L5BmVSJAVtsuAaK2MXL9mic')
+		addressRequest.get(function(address) {
+			const addressDetails = address.results[0].address_components;
+			const addressToDisplay = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
+			return addressToDisplay;
 
-    console.log('saveRouteButton clicked');
-    const route = new Route(null, null, start, finish);
-    const request = new Request('http://localhost:3000/api/routes');
+			const start = addressToDisplay;
+			const finish = destinationInput.value;
 
-    request.post(function(addedEntity) {
-    }, route);
+			console.log('saveRouteButton clicked');
+			const route = new Route(null, start, finish);
+			const request = new Request('http://localhost:3000/api/routes');
 
+			request.post(function(addedEntity) {
+			}, route);
+		});
   });
 
 
