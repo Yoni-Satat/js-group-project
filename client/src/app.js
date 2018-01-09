@@ -3,49 +3,32 @@ const MapWrapper = require('./views/mapWrapper.js');
 const AutoComplete = require('./views/autoCompleteWrapper.js');
 const DirectionsWrapper = require('./views/directionsWrapper.js');
 
-
-
-
 const app = function() {
   autoComplete = new AutoComplete();
   directionsWrapper = new DirectionsWrapper();
 
-
   const homeFunction = function () {
-    var directionsServiceHome = new google.maps.DirectionsService;
-    var directionsDisplayHome = new google.maps.DirectionsRenderer;
 
     var input = document.getElementById('destination-input');
 
-
-
-    console.log('clicked');
     const container = document.querySelector('#container');
     container.innerHTML = "";
 
     const destinationInput = document.createElement('input');
-    const feildLabel = document.createElement('label');
     // destinationInput.id = "destination-input"
+    const feildLabel = document.createElement('label');
     feildLabel.innerText = 'destination';
     feildLabel.id = 'destination-input'
-    container.appendChild(feildLabel);
-    container.appendChild(destinationInput);
-    console.log(autocompleteHome);
-    var autocompleteHome = autoComplete.autoCompleteBox(destinationInput);
-    console.log(autocompleteHome);
-
-    // var card = document.getElementById('destination-input');
-
-    // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-
-
     const locationLabel = document.createElement('label');
     locationLabel.innerText = 'From My Location';
     const checkBox = document.createElement('input');
     checkBox.type = 'checkbox';
+    container.appendChild(feildLabel);
+    container.appendChild(destinationInput);
     container.appendChild(locationLabel);
     container.appendChild(checkBox);
 
+    var autocompleteHome = autoComplete.autoCompleteBox(destinationInput);
 
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
@@ -54,8 +37,6 @@ const app = function() {
     checkBox.addEventListener('click', function() {
       console.log('checked');
     });
-
-
 
     goButton.addEventListener('click', function() {
       console.log('clicked');
@@ -76,7 +57,6 @@ const app = function() {
       // autocomplete.addListener('place_changed', function()
 
       directionsWrapper.calculateAndDisplayRoute(map, start, finish);
-
     });
   }
 
