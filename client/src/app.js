@@ -14,7 +14,9 @@ const app = function() {
     var input = document.getElementById('destination-input');
 
     const container = document.querySelector('#container');
-    const homeForm = document.querySelector('#home-form');
+    homeForm = document.querySelector('#home-form');
+    homeForm.innerHTML = "";
+
     container.innerHTML = "";
     const lineBreak = document.createElement('br');
     const lineBreakTwo = document.createElement('br');
@@ -97,7 +99,10 @@ const app = function() {
 
   const exploreFunction = function () {
     console.log('clicked');
+
     const container = document.querySelector('#container');
+    homeForm.innerHTML = "";
+
     container.innerHTML = "";
     const center = {
       lat: 55.946962,
