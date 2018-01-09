@@ -1,11 +1,13 @@
 const Request = require('./services/request.js');
 const MapWrapper = require('./views/mapWrapper.js');
-
+const AutoComplete = require('./views/autoCompleteWrapper.js');
 
 
 
 
 const app = function() {
+  autoComplete = new AutoComplete();
+
 
   const homeFunction = function () {
     var directionsServiceHome = new google.maps.DirectionsService;
@@ -21,12 +23,15 @@ const app = function() {
 
     const destinationInput = document.createElement('input');
     const feildLabel = document.createElement('label');
-    destinationInput.id = "destination-input"
+    // destinationInput.id = "destination-input"
     feildLabel.innerText = 'destination';
     feildLabel.id = 'destination-input'
     container.appendChild(feildLabel);
     container.appendChild(destinationInput);
-    var autocompleteHome = new google.maps.places.Autocomplete(destinationInput);
+    console.log(autocompleteHome);
+    var autocompleteHome = autoComplete.autoCompleteBox(destinationInput);
+    console.log(autocompleteHome);
+
     // var card = document.getElementById('destination-input');
 
     // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
@@ -53,7 +58,7 @@ const app = function() {
     goButton.addEventListener('click', function() {
       console.log('clicked');
 
-      autocompleteHome.bindTo('destination-input');
+      // autocompleteHome.bindTo('destination-input');
 
 
       // const container = document.querySelector('#container');
