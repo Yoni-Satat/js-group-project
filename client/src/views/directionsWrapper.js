@@ -3,8 +3,8 @@ const DirectionsWrapper = function () {
 }
 
 DirectionsWrapper.prototype.calculateAndDisplayRoute = function (map, start, end) {
-  const directionsService = new google.maps.DirectionsService;
-  const directionsDisplay = new google.maps.DirectionsRenderer;
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
   directionsService.route({
     origin: start,
