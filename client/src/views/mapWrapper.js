@@ -1,5 +1,5 @@
 const MapWrapper = function () {
-	console.log('');
+	
 }
 
 MapWrapper.prototype.newMap = function (container, coords, zoom) {
