@@ -42,6 +42,8 @@ const app = function() {
 
     goButton.addEventListener('click', function() {
       console.log('clicked');
+      console.log('clicked');
+
 			const finish = 'Edinburgh, United Kingdom';
 			mapWrapper.geoLocate(function(center){
 				const map = mapWrapper.newMap(container, center, 7);
