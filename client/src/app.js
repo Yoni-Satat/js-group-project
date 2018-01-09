@@ -14,6 +14,7 @@ const app = function() {
     var input = document.getElementById('destination-input');
 
     const container = document.querySelector('#container');
+    const homeForm = document.querySelector('#home-form');
     container.innerHTML = "";
     const lineBreak = document.createElement('br');
     const lineBreakTwo = document.createElement('br');
@@ -28,18 +29,18 @@ const app = function() {
     locationLabel.id = 'destination-label';
     const checkBox = document.createElement('input');
     checkBox.type = 'checkbox';
-    container.appendChild(feildLabel);
-    container.appendChild(destinationInput);
-    container.appendChild(lineBreak);
-    container.appendChild(locationLabel);
-    container.appendChild(checkBox);
+    homeForm.appendChild(feildLabel);
+    homeForm.appendChild(destinationInput);
+    homeForm.appendChild(lineBreak);
+    homeForm.appendChild(locationLabel);
+    homeForm.appendChild(checkBox);
 
     autoComplete.autoCompleteBox(destinationInput);
 
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
-    container.appendChild(lineBreakTwo);
-    container.appendChild(goButton);
+    homeForm.appendChild(lineBreakTwo);
+    homeForm.appendChild(goButton);
 
     checkBox.addEventListener('click', function() {
       console.log('checked');
@@ -47,11 +48,14 @@ const app = function() {
 
     goButton.addEventListener('click', function() {
 			const finish = destinationInput.value;
+
 			mapWrapper.geoLocate(function(geoLocation){
 				console.log(geoLocation);
 				const map = mapWrapper.newMap(container, geoLocation, 7);
 				directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
 			});
+      homeForm.innerHTML = "";
+
     });
   }
 
