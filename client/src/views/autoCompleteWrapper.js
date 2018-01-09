@@ -7,7 +7,7 @@ const AutoComplete = function (map) {
 }
 
 AutoComplete.prototype.autoCompleteBox = function (selectedId) {
-  const autocomplete = new google.maps.places.Autocomplete(selectedId);
+  var autocomplete = new google.maps.places.Autocomplete(selectedId);
   return autocomplete;
 }
 
