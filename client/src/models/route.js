@@ -1,8 +1,8 @@
-const Route = function(id, title, coordsStart, coordsEnd) {
+const Route = function(id, title, start, end) {
   this.id = id;
   this.title = title;
-  this.coordsStart = coordsStart;
-  this.coordsEnd = coordsEnd;
+  this.start = start;
+  this.end = end;
 };
 
 module.exports = Route;

@@ -2,6 +2,7 @@ const Request = require('./services/request.js');
 const MapWrapper = require('./views/mapWrapper.js');
 const AutoComplete = require('./views/autoCompleteWrapper.js');
 const DirectionsWrapper = require('./views/directionsWrapper.js');
+const Route = require('./models/route.js');
 
 const app = function() {
   autoComplete = new AutoComplete();
@@ -91,6 +92,21 @@ const app = function() {
   listViewButton.addEventListener('click', function() {
     console.log('clicked');
   });
+
+  const saveRouteButton = document.querySelector('#save-route');
+  saveRouteButton.addEventListener('click', function() {
+    const start = document.getElementById('start').value;
+    const finish = document.getElementById('end').value;
+
+    console.log('saveRouteButton clicked');
+    const route = new Route(null, null, start, finish);
+    const request = new Request('http://localhost:3000/api/routes');
+
+    request.post(function(addedEntity) {  
+    }, route);
+
+  });
+
 
   console.log('END OF APP');
 
