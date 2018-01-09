@@ -2,6 +2,7 @@ const Request = require('./services/request.js');
 const MapWrapper = require('./views/mapWrapper.js');
 const AutoComplete = require('./views/autoCompleteWrapper.js');
 const DirectionsWrapper = require('./views/directionsWrapper.js');
+const Route = require('./models/route.js');
 
 const app = function() {
   autoComplete = new AutoComplete();
@@ -43,6 +44,9 @@ const app = function() {
 
       const start = document.getElementById('start').value;
       const finish = document.getElementById('end').value;
+
+
+
       var map = new google.maps.Map(document.querySelector('#container'), {
         zoom: 7,
         center: {lat: 41.85, lng: -87.65}
@@ -94,7 +98,18 @@ const app = function() {
 
   const saveRouteButton = document.querySelector('#save-route');
   saveRouteButton.addEventListener('click', function() {
+    const start = document.getElementById('start').value;
+    const finish = document.getElementById('end').value;
+    console.log(start);
+    console.log(finish);
     console.log('saveRouteButton clicked');
+    const route = new Route(null, null, start, finish);
+    const request = new Request('http://localhost:3000/api/routes');
+
+    request.post(function(addedEntity) {
+      console.log(addedEntity);
+    }, route);
+
   });
 
 

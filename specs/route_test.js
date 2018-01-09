@@ -5,7 +5,7 @@ describe('Route', function() {
   let route1;
 
   beforeEach(function() {
-    route1 = new Route('this is an ID', 'school', {lat: 10, lng: 10}, {lat: 20, lng: 20} );
+    route1 = new Route('this is an ID', 'school', 'Edinburgh', 'Aberdeen' );
 
   });
 
@@ -18,13 +18,11 @@ describe('Route', function() {
   });
 
   it('should have a start point', function() {
-    assert.strictEqual(route1.coordsStart.lat, 10 );
-    assert.strictEqual(route1.coordsStart.lng, 10 );
+    assert.strictEqual(route1.start, 'Edinburgh' );
   });
 
   it('should have a end point', function() {
-    assert.strictEqual(route1.coordsEnd.lat, 20 );
-    assert.strictEqual(route1.coordsEnd.lng, 20 );
+    assert.strictEqual(route1.end, 'Aberdeen');
   });
 
 });
