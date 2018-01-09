@@ -82,6 +82,8 @@ const app = function() {
 	const displayRoutes = function () {
 		const container = document.querySelector('#container');
 		container.innerHTML = "";
+    homeForm.innerHTML = "";
+
 
 		const mapDiv = document.createElement('div');
 		mapDiv.id = 'map';
@@ -117,6 +119,8 @@ const app = function() {
 	const exploreFunction = function () {
 		console.log('clicked');
 		const container = document.querySelector('#container');
+    homeForm.innerHTML = "";
+
 		container.innerHTML = "";
 		const center = {
 			lat: 55.946962,
