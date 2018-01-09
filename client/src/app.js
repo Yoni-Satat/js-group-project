@@ -100,14 +100,12 @@ const app = function() {
   saveRouteButton.addEventListener('click', function() {
     const start = document.getElementById('start').value;
     const finish = document.getElementById('end').value;
-    console.log(start);
-    console.log(finish);
+
     console.log('saveRouteButton clicked');
     const route = new Route(null, null, start, finish);
     const request = new Request('http://localhost:3000/api/routes');
 
-    request.post(function(addedEntity) {
-      console.log(addedEntity);
+    request.post(function(addedEntity) {  
     }, route);
 
   });
