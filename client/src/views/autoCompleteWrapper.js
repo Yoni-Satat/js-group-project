@@ -2,6 +2,7 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 const AutoComplete = function (map) {
+	console.log('');
   this.map = map;
 }
 
