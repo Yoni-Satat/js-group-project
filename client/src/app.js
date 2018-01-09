@@ -41,7 +41,8 @@ const app = function() {
 
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
-    goButton.id ='goButton'
+    goButton.id ='goButton';
+    goButton.class = 'blue';
     homeForm.appendChild(lineBreakTwo);
     homeForm.appendChild(goButton);
 
