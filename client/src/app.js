@@ -78,6 +78,7 @@ const app = function() {
   const displayRoutes = function () {
     const container = document.querySelector('#container');
     const ulDisplayRoutes = document.createElement('ul');
+    ulDisplayRoutes.className = "hvr-underline-from-left";
     container.innerHTML = "";
 
     const request = new Request('http://localhost:3000/api/routes');
