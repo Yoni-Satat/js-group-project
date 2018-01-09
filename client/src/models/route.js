@@ -1,5 +1,4 @@
-const Route = function(id, title, start, end) {
-  this.id = id;
+const Route = function(title, start, end) {
   this.title = title;
   this.start = start;
   this.end = end;
