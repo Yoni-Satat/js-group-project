@@ -17,4 +17,14 @@ describe('Route', function() {
     assert.strictEqual(route1.title, 'school');
   });
 
+  it('should have a start point', function() {
+    assert.strictEqual(route1.coordsStart.lat, 10 );
+    assert.strictEqual(route1.coordsStart.lng, 10 );
+  });
+
+  it('should have a end point', function() {
+    assert.strictEqual(route1.coordsEnd.lat, 20 );
+    assert.strictEqual(route1.coordsEnd.lng, 20 );
+  });
+
 });
