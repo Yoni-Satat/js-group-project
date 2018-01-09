@@ -8,6 +8,11 @@ const MapWrapper = require('./views/mapWrapper.js');
 const app = function() {
 
   const homeFunction = function () {
+    var directionsServiceHome = new google.maps.DirectionsService;
+    var directionsDisplayHome = new google.maps.DirectionsRenderer;
+
+    var input = document.getElementById('destination-input');
+
 
 
     console.log('clicked');
@@ -16,9 +21,16 @@ const app = function() {
 
     const destinationInput = document.createElement('input');
     const feildLabel = document.createElement('label');
+    destinationInput.id = "destination-input"
     feildLabel.innerText = 'destination';
+    feildLabel.id = 'destination-input'
     container.appendChild(feildLabel);
     container.appendChild(destinationInput);
+    var autocompleteHome = new google.maps.places.Autocomplete(destinationInput);
+    // var card = document.getElementById('destination-input');
+
+    // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
 
     const locationLabel = document.createElement('label');
     locationLabel.innerText = 'From My Location';
@@ -26,6 +38,7 @@ const app = function() {
     checkBox.type = 'checkbox';
     container.appendChild(locationLabel);
     container.appendChild(checkBox);
+
 
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
@@ -35,9 +48,12 @@ const app = function() {
       console.log('checked');
     });
 
+
+
     goButton.addEventListener('click', function() {
       console.log('clicked');
 
+      autocompleteHome.bindTo('destination-input');
 
 
       // const container = document.querySelector('#container');
