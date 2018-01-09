@@ -7,6 +7,7 @@ const Route = require('./models/route.js');
 const app = function() {
   autoComplete = new AutoComplete();
   directionsWrapper = new DirectionsWrapper();
+	const mapWrapper = new MapWrapper();
 
   const homeFunction = function () {
 
@@ -41,23 +42,13 @@ const app = function() {
 
     goButton.addEventListener('click', function() {
       console.log('clicked');
+      console.log('clicked');
 
-      const start = document.getElementById('start').value;
-      const finish = document.getElementById('end').value;
-      var map = new google.maps.Map(document.querySelector('#container'), {
-        zoom: 7,
-        center: {lat: 41.85, lng: -87.65}
-      });
-
-      var onChangeHandler = function() {
-        directionsWrapper.calculateAndDisplayRoute(map, start, finish);
-      };
-      document.getElementById('start').addEventListener('change', onChangeHandler);
-      document.getElementById('end').addEventListener('change', onChangeHandler);
-
-      // autocomplete.addListener('place_changed', function()
-
-      directionsWrapper.calculateAndDisplayRoute(map, start, finish);
+			const finish = 'Edinburgh, United Kingdom';
+			mapWrapper.geoLocate(function(center){
+				const map = mapWrapper.newMap(container, center, 7);
+				directionsWrapper.calculateAndDisplayRoute(map, center, finish);
+			});
     });
   }
 
@@ -102,7 +93,7 @@ const app = function() {
     const route = new Route(null, null, start, finish);
     const request = new Request('http://localhost:3000/api/routes');
 
-    request.post(function(addedEntity) {  
+    request.post(function(addedEntity) {
     }, route);
 
   });

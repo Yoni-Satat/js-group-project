@@ -1,5 +1,5 @@
 const DirectionsWrapper = function () {
-
+	console.log('');
 }
 
 DirectionsWrapper.prototype.calculateAndDisplayRoute = function (map, start, end) {
