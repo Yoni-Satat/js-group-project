@@ -13,4 +13,8 @@ describe('Route', function() {
     assert.strictEqual(route1.id, 'this is an ID');
   });
 
+  it('should have a title', function() {
+    assert.strictEqual(route1.title, 'school');
+  });
+
 });
