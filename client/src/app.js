@@ -92,6 +92,12 @@ const app = function() {
     console.log('clicked');
   });
 
+  const saveRouteButton = document.querySelector('#save-route');
+  saveRouteButton.addEventListener('click', function() {
+    console.log('saveRouteButton clicked');
+  });
+
+
   console.log('END OF APP');
 
 }
