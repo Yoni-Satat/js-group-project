@@ -7,11 +7,11 @@ const Route = require('./models/route.js');
 const app = function() {
   autoComplete = new AutoComplete();
   directionsWrapper = new DirectionsWrapper();
-	mapWrapper = new MapWrapper();
+	const mapWrapper = new MapWrapper();
 
   const homeFunction = function () {
 
-    const input = document.getElementById('destination-input');
+    var input = document.getElementById('destination-input');
 
     const container = document.querySelector('#container');
     container.innerHTML = "";
@@ -30,7 +30,7 @@ const app = function() {
     container.appendChild(locationLabel);
     container.appendChild(checkBox);
 
-    const autocompleteHome = autoComplete.autoCompleteBox(destinationInput);
+    var autocompleteHome = autoComplete.autoCompleteBox(destinationInput);
 
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
@@ -42,6 +42,8 @@ const app = function() {
 
     goButton.addEventListener('click', function() {
       console.log('clicked');
+      console.log('clicked');
+
 			const finish = 'Edinburgh, United Kingdom';
 			mapWrapper.geoLocate(function(center){
 				const map = mapWrapper.newMap(container, center, 7);
@@ -84,7 +86,7 @@ const app = function() {
       lat: 55.946962,
       lng: -3.20195
     }
-			const map = mapWrapper.newMap(container, center, 19);
+    const map = new MapWrapper(container, center, 19);
   };
 
   const resetContainer = function () {
