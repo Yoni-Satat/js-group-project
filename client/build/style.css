@@ -11,14 +11,28 @@ nav {
   justify-content: center;
 }
 
-home-form{
+#home-form{
+  font-size: 20px;
   background-color: blue;
+  width: 30%;
+  margin: auto;
+  margin-top: 5%;
+  text-align: justify;
+  margin: auto;
 }
 
 button {
   margin: 10px;
   width: 20%;
   height: 30px;
+  align-self: center;
+}
+
+#goButton {
+ color: purple;
+  align-content: center;
+  align-self: center;
+  margin: auto;
 }
 
 #container {
