@@ -94,9 +94,9 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
     });
   });
 
-  server.put('/api/routes', function(req, res) {
+  server.put('/api/routes/:id', function(req, res) {
 
-    db.collection('fav_routes').update({_id: new ObjectID(req.params.id)}, {$set: {title: "Andre", done: true }}, function(err, success) {
+    db.collection('fav_routes').update({_id: new ObjectID(req.params.id)}, {$set: {title: "Yoni", done: false }}, function(err, success) {
       if(err) {
         console.log(err);
         res.status(400);
