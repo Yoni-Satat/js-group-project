@@ -28,7 +28,6 @@ const app = function() {
     container.appendChild(destinationInput);
     var autocompleteHome = new google.maps.places.Autocomplete(destinationInput);
     // var card = document.getElementById('destination-input');
-    autocompleteHome.bindTo('destination-input');
 
     // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
@@ -40,6 +39,7 @@ const app = function() {
     container.appendChild(locationLabel);
     container.appendChild(checkBox);
 
+
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
     container.appendChild(goButton);
@@ -48,9 +48,12 @@ const app = function() {
       console.log('checked');
     });
 
+
+
     goButton.addEventListener('click', function() {
       console.log('clicked');
 
+      autocompleteHome.bindTo('destination-input');
 
 
       // const container = document.querySelector('#container');
