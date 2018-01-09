@@ -1,12 +1,14 @@
 const Request = require('./services/request.js');
 const MapWrapper = require('./views/mapWrapper.js');
 const AutoComplete = require('./views/autoCompleteWrapper.js');
+const DirectionsWrapper = require('./views/directionsWrapper.js');
 
 
 
 
 const app = function() {
   autoComplete = new AutoComplete();
+  directionsWrapper = new DirectionsWrapper();
 
 
   const homeFunction = function () {
@@ -70,16 +72,18 @@ const app = function() {
       // need to define what the pannel is ??
 
 
+      const start = document.getElementById('start').value;
+      const finish = document.getElementById('end').value;
       var directionsService = new google.maps.DirectionsService;
       var directionsDisplay = new google.maps.DirectionsRenderer;
       var map = new google.maps.Map(document.querySelector('#container'), {
         zoom: 7,
         center: {lat: 41.85, lng: -87.65}
       });
-      directionsDisplay.setMap(map);
+      // directionsDisplay.setMap(map);
 
       var onChangeHandler = function() {
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
+        directionsWrapper.calculateAndDisplayRoute(map, start, finish);
       };
       document.getElementById('start').addEventListener('change', onChangeHandler);
       document.getElementById('end').addEventListener('change', onChangeHandler);
@@ -143,19 +147,22 @@ const app = function() {
       });
 
 
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        directionsService.route({
-          origin: document.getElementById('start').value,
-          destination: document.getElementById('end').value,
-          travelMode: 'BICYCLING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
+
+      directionsWrapper.calculateAndDisplayRoute(map, start, finish);
+
+      // function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      //   directionsService.route({
+      //     origin: ,
+      //     destination: ,
+      //     travelMode: 'BICYCLING'
+      //   }, function(response, status) {
+      //     if (status === 'OK') {
+      //       directionsDisplay.setDirections(response);
+      //     } else {
+      //       window.alert('Directions request failed due to ' + status);
+      //     }
+      //   });
+      // }
 
 
       // need to make the request dynamically populated by the input boxes
