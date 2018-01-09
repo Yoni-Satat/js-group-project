@@ -5,34 +5,43 @@ const DirectionsWrapper = require('./views/directionsWrapper.js');
 const Route = require('./models/route.js');
 
 const app = function() {
-	autoComplete = new AutoComplete();
-	directionsWrapper = new DirectionsWrapper();
-	const mapWrapper = new MapWrapper();
+  autoComplete = new AutoComplete();
+  directionsWrapper = new DirectionsWrapper();
+  const mapWrapper = new MapWrapper();
 
-	const homeFunction = function () {
+  const homeFunction = function () {
 
-		var input = document.getElementById('destination-input');
+    var input = document.getElementById('destination-input');
 
-		const container = document.querySelector('#container');
-		container.innerHTML = "";
+    const container = document.querySelector('#container');
+    homeForm = document.querySelector('#home-form');
+    homeForm.innerHTML = "";
 
-		const destinationInput = document.createElement('input');
-		// destinationInput.id = "destination-input"
-		const feildLabel = document.createElement('label');
-		feildLabel.innerText = 'destination';
-		feildLabel.id = 'destination-input'
-		const locationLabel = document.createElement('label');
-		locationLabel.innerText = 'From My Location';
-		const checkBox = document.createElement('input');
-		checkBox.type = 'checkbox';
-		container.appendChild(feildLabel);
-		container.appendChild(destinationInput);
-		container.appendChild(locationLabel);
-		container.appendChild(checkBox);
+    container.innerHTML = "";
+    const lineBreak = document.createElement('br');
+    const lineBreakTwo = document.createElement('br');
+
+    const destinationInput = document.createElement('input');
+    destinationInput.id = "destination-input"
+    const feildLabel = document.createElement('label');
+    feildLabel.innerText = 'destination';
+    // feildLabel.id = 'destination-input';
+    const locationLabel = document.createElement('label');
+    locationLabel.innerText = 'From My Location';
+    locationLabel.id = 'destination-label';
+    const checkBox = document.createElement('input');
+    checkBox.type = 'checkbox';
+    homeForm.appendChild(feildLabel);
+    homeForm.appendChild(destinationInput);
+    homeForm.appendChild(lineBreak);
+		// container.appendChild(locationLabel);
+		// container.appendChild(checkBox);
 
 		autoComplete.autoCompleteBox(destinationInput);
 
 		const goButton = document.createElement('button');
+    goButton.className = 'hvr-underline-from-center';
+
 		goButton.innerText = 'Go';
 		container.appendChild(goButton);
 
@@ -91,6 +100,7 @@ const app = function() {
 				liShowOnMap.innerText = 'Display on map';
 				const line = document.createElement('hr');
 				container.appendChild(ulDisplayRoutes);
+        ulDisplayRoutes.className = "hvr-underline-from-left";
 				ulDisplayRoutes.appendChild(liStart);
 				ulDisplayRoutes.appendChild(liEnd);
 				ulDisplayRoutes.appendChild(liShowOnMap);
@@ -140,8 +150,6 @@ const app = function() {
 
 	console.log('END OF APP');
 
-goButton.className = 'hvr-underline-from-center';
-ulDisplayRoutes.className = "hvr-underline-from-left";
 }
 
 document.addEventListener('DOMContentLoaded', app);
