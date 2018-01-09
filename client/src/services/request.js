@@ -10,7 +10,6 @@ Request.prototype.get = function(callback) {
       return;
     };
     this.responseBody = JSON.parse(this.responseText);
-    console.log("responseBody", this.responseBody);
     callback(this.responseBody);
   });
   request.send();
