@@ -1,6 +1,5 @@
 const Request = function(url) {
   this.url = url;
-  this.responseBody = [];
 }
 
 Request.prototype.get = function(callback) {

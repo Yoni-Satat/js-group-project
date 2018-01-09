@@ -4,6 +4,20 @@ const server = express();
 const path = require('path');
 
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
+
+/*
+  const blah = db.collection('blah');
+
+  if(req.params.title === '') {
+    res.status(400)
+    res.send()
+  }
+
+  blah.update({_id: new ObjectID(req.params.id)}, {$set: { done: req.params.completed }}, function(err, success) {
+
+  })
+*/
 
 server.use(express.static('client/build'));
 server.use(parser.urlencoded({extended:true}));
@@ -64,8 +78,39 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
       res.status(204);
       res.send();
     });
-
   });
+
+  server.delete('/api/routes/:id', function(req, res) {
+    db.collection('fav_routes').deleteOne({_id: new ObjectID(req.params.id)}, function(err, success) {
+      if(err) {
+        console.log(err);
+        res.status(500);
+        res.send();
+        return;
+      }
+
+      res.status(204);
+      res.send();
+    });
+  });
+
+  server.put('/api/routes/:id', function(req, res) {
+
+    db.collection('fav_routes').update({_id: new ObjectID(req.params.id)}, {$set: {title: "Yoni", done: false }}, function(err, success) {
+      if(err) {
+        console.log(err);
+        res.status(400);
+        res.send();
+        return;
+      }
+      res.status(201);
+      res.send();
+    });
+  });
+
+
+
+
 
   server.listen(3000, function(){
     console.log("Listening on port 3000");
