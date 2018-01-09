@@ -30,7 +30,7 @@ const app = function() {
     container.appendChild(locationLabel);
     container.appendChild(checkBox);
 
-    var autocompleteHome = autoComplete.autoCompleteBox(destinationInput);
+    autoComplete.autoCompleteBox(destinationInput);
 
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
@@ -41,13 +41,11 @@ const app = function() {
     });
 
     goButton.addEventListener('click', function() {
-      console.log('clicked');
-      console.log('clicked');
-
-			const finish = 'Edinburgh, United Kingdom';
-			mapWrapper.geoLocate(function(center){
-				const map = mapWrapper.newMap(container, center, 7);
-				directionsWrapper.calculateAndDisplayRoute(map, center, finish);
+			const finish = destinationInput.value;
+			mapWrapper.geoLocate(function(geoLocation){
+				console.log(geoLocation);
+				const map = mapWrapper.newMap(container, geoLocation, 7);
+				directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
 			});
     });
   }
@@ -73,9 +71,6 @@ const app = function() {
       });
 
     });
-
-
-
   }
 
   const exploreFunction = function () {
@@ -114,8 +109,12 @@ const app = function() {
 
   const saveRouteButton = document.querySelector('#save-route');
   saveRouteButton.addEventListener('click', function() {
+		// mapWrapper.geoLocate(function(geoLocation){
+		// 	const map = mapWrapper.newMap(container, geoLocation, 7);
+		// 	directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
+		// });
     const start = document.getElementById('start').value;
-    const finish = document.getElementById('end').value;
+    const finish = destinationInput.value;
 
     console.log('saveRouteButton clicked');
     const route = new Route(null, null, start, finish);
