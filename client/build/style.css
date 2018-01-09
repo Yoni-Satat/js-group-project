@@ -9,3 +9,8 @@ nav {
   height: 500px;
   width: 500px;
 }
+
+#map {
+	height: 350px;
+	width: 350px
+}
