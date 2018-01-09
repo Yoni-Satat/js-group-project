@@ -1,11 +1,38 @@
-nav {
-  display: flex;
-  justify-content: center;
-  padding: 5%;
-  margin: 5%;
+h1 {
+  text-align: center;
+  margin: 2%;
 }
 
+
+nav {
+  display: flex;
+  background-color: teal;
+  width: 100%;
+  justify-content: center;
+}
+
+button {
+  margin: 10px;
+}
+
+
+
 #container {
+  margin: 5%;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 10px;
+  text-align: center;
   height: 500px;
   width: 500px;
+}
+
+#destination-input {
+  height: 15px;
+
+}
+
+#destination-label {
+  height: 15px;
+
 }

@@ -15,6 +15,8 @@ const app = function() {
 
     const container = document.querySelector('#container');
     container.innerHTML = "";
+    const lineBreak = document.createElement('br');
+    const lineBreakTwo = document.createElement('br');
 
     const destinationInput = document.createElement('input');
     // destinationInput.id = "destination-input"
@@ -23,10 +25,12 @@ const app = function() {
     feildLabel.id = 'destination-input'
     const locationLabel = document.createElement('label');
     locationLabel.innerText = 'From My Location';
+    locationLabel.id = 'destination-label';
     const checkBox = document.createElement('input');
     checkBox.type = 'checkbox';
     container.appendChild(feildLabel);
     container.appendChild(destinationInput);
+    container.appendChild(lineBreak);
     container.appendChild(locationLabel);
     container.appendChild(checkBox);
 
@@ -34,6 +38,7 @@ const app = function() {
 
     const goButton = document.createElement('button');
     goButton.innerText = 'Go';
+    container.appendChild(lineBreakTwo);
     container.appendChild(goButton);
 
     checkBox.addEventListener('click', function() {
