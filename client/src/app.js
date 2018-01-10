@@ -103,7 +103,7 @@ const saveRouteFunction = function () {
 		addressRequest.get(function(address) {
 			const addressDetails = address.results[0].address_components;
 			const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
-			const route = new Route(null, start, finish);
+			const route = new Route(null, start, finish, done);
 			const request = new Request('http://localhost:3000/api/routes');
 			request.post(function(addedEntity) {
 			}, route);
