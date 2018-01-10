@@ -155,6 +155,7 @@ const saveRouteFunction = function () {
 const exploreFunction = function () {
 	const mapWrapper = new MapWrapper();
 	const container = document.querySelector('#container');
+	const homeForm = document.querySelector('#home-form');
 	homeForm.innerHTML = "";
 
 	container.innerHTML = "";
