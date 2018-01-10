@@ -3,7 +3,7 @@ const MapWrapper = require('./views/mapWrapper.js');
 const AutoComplete = require('./views/autoCompleteWrapper.js');
 const DirectionsWrapper = require('./views/directionsWrapper.js');
 const Route = require('./models/route.js');
-
+const globalRoute = new Route('title', 'start', 'end', 'done');
 const app = function() {
 
 	const homeButton = document.querySelector('#home');
@@ -112,7 +112,10 @@ const saveRouteFunction = function () {
 		addressRequest.get(function(address) {
 			const addressDetails = address.results[0].address_components;
 			const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
-			const route = new Route(null, start, finish, false);
+			route.title = null;
+			route.start = start;
+			route.end = finish;
+			route.done = false;
 			const request = new Request('http://localhost:3000/api/routes');
 			request.post(function(addedEntity) {
 			}, route);
@@ -144,6 +147,9 @@ const displayRoutes = function () {
 
 	request.get(function(savedRoutes) {
 		savedRoutes.forEach(function(route) {
+
+			route = new Route(route)
+
 			const ulDisplayRoutes = document.createElement('ul');
 			const liStart = document.createElement('li');
 			liStart.innerText = route.start;
@@ -151,6 +157,8 @@ const displayRoutes = function () {
 			liEnd.innerText = route.end;
 			const deleteBtn = document.createElement('button');
 			deleteBtn.innerText = 'Delete';
+			const done = document.createElement('button');
+			done.innerText = 'Mark done';
 			const liShowOnMap = document.createElement('li');
 			liShowOnMap.innerText = 'Display on map';
 			const line = document.createElement('hr');
@@ -161,6 +169,7 @@ const displayRoutes = function () {
 			ulDisplayRoutes.appendChild(liEnd);
 			ulDisplayRoutes.appendChild(liShowOnMap);
 			ulDisplayRoutes.appendChild(deleteBtn);
+			ulDisplayRoutes.appendChild(done);
 			ulDisplayRoutes.appendChild(line);
 			liShowOnMap.addEventListener('click', function () {
 				mapDiv.innerHTML = "";
@@ -175,6 +184,9 @@ const displayRoutes = function () {
 				request.delete(function(deletedEntity) {
 				}, route);
 				displayRoutes();
+			});
+			done.addEventListener('click', function () {
+				route.toggleDone();
 			});
 		});
 		container.appendChild(mapDiv);
