@@ -1,16 +1,200 @@
-nav {
+body {
+font-family: 'Scope One', serif;
+
+  text-align: center;
+  margin: 2%;
+}
+
+#map {
+  width: 350px;
+  height: 350px;
+}
+
+ul {
   display: flex;
+  margin-left: 0;
+  background-color: blue;
+}
+
+h1 {
+  font-family: 'Lora', serif;
+  text-align: center;
+  margin: 2%;
+}
+
+
+
+
+nav {
+  margin-top: 2%;
+  margin-left: -15px;
+  border-style: solid;
+  border-width: thick;
+  border-color: red;
+  display: flex;
+  border-width: medium;
+  background-color: white;
+  width: 102%;
   justify-content: center;
-  padding: 5%;
-  margin: 5%;
+  margin-bottom: 20px;
+}
+
+#destination-input {
+  margin-left: 5px;
+  width: 60%;
+}
+
+#home-form button {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: red;
+}
+
+#home-form{
+  margin-top: auto;
+  font-size: 20px;
+  /*background-color: blue;*/
+  width: 60%;
+  justify-content: center;
+  margin: auto;
+  margin-top: 15%;
+  text-align: justify;
+  margin: auto;
+}
+
+button {
+  margin: 10px;
+  width: 20%;
+  height: 30px;
+  /*align-self: center;*/
+}
+
+
+
+#goButton {
+  display: flex;
+  padding-left: 20px;
+ color: purple;
+  align-content: center;
+  align-self: center;
 }
 
 #container {
+  margin: 5%;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 10px;
+  text-align: center;
   height: 500px;
   width: 500px;
 }
 
-#map {
-	height: 350px;
-	width: 350px
+#destination-input {
+  height: 15px;
+}
+
+#destination-label {
+  height: 15px;
+}
+
+.hvr-bounce-to-right {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.hvr-bounce-to-right:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #2098D1;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {
+  color: white;
+}
+.hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+
+.hvr-underline-from-center {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  overflow: hidden;
+}
+.hvr-underline-from-center:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  background: #2098D1;
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {
+  left: 0;
+  right: 0;
+}
+
+.hvr-underline-from-left {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  overflow: hidden;
+}
+.hvr-underline-from-left:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  background: #2098D1;
+  height: 4px;
+  -webkit-transition-property: right;
+  transition-property: right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-underline-from-left:hover:before, .hvr-underline-from-left:focus:before, .hvr-underline-from-left:active:before {
+  right: 0;
 }
