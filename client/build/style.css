@@ -6,18 +6,28 @@ body {
 
 
 
-#list-contain {
+.list-contain {
   display: flex;
   /*background-color: red;*/
 
 }
 
-#list-contain ul {
+.list-contain ul {
   display: block;
   text-align: left;
   /*background-color: grey;*/
+}
 
 
+
+.container {
+  margin: 5%;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 10px;
+  text-align: center;
+  height: 500px;
+  width: 500px;
 }
 
 #map {
@@ -103,16 +113,6 @@ button {
  color: purple;
   align-content: center;
   align-self: center;
-}
-
-#container {
-  margin: 5%;
-  margin-left: 25%;
-  margin-right: 25%;
-  padding: 10px;
-  text-align: center;
-  height: 500px;
-  width: 500px;
 }
 
 #destination-input {
