@@ -3,7 +3,6 @@ const MapWrapper = require('./views/mapWrapper.js');
 const AutoComplete = require('./views/autoCompleteWrapper.js');
 const DirectionsWrapper = require('./views/directionsWrapper.js');
 const Route = require('./models/route.js');
-const globalRoute = new Route('title', 'start', 'end', 'done');
 const app = function() {
 
 	const homeButton = document.querySelector('#home');
@@ -112,10 +111,7 @@ const saveRouteFunction = function () {
 		addressRequest.get(function(address) {
 			const addressDetails = address.results[0].address_components;
 			const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
-			route.title = null;
-			route.start = start;
-			route.end = finish;
-			route.done = false;
+			const route = new Route(start, finish, false);
 			const request = new Request('http://localhost:3000/api/routes');
 			request.post(function(addedEntity) {
 			}, route);
@@ -147,9 +143,6 @@ const displayRoutes = function () {
 
 	request.get(function(savedRoutes) {
 		savedRoutes.forEach(function(route) {
-
-			route = new Route(route)
-
 			const ulDisplayRoutes = document.createElement('ul');
 			const liStart = document.createElement('li');
 			liStart.innerText = route.start;
@@ -177,8 +170,6 @@ const displayRoutes = function () {
 				directionsWrapper.calculateAndDisplayRoute(map, route.start, route.end);
 			});
 			deleteBtn.addEventListener('click', function() {
-				console.log('deleteBtn clicked');
-				console.log(route._id);
 				const url = `http://localhost:3000/api/routes/${route._id}`
 				const request = new Request(url);
 				request.delete(function(deletedEntity) {
@@ -186,7 +177,12 @@ const displayRoutes = function () {
 				displayRoutes();
 			});
 			done.addEventListener('click', function () {
-				route.toggleDone();
+				const routeObject = new Route(route.start, route.end, route.done);
+				routeObject.toggleDone();
+				console.log(routeObject);
+				const request = new Request(`http://localhost:3000/api/routes/${route._id}`)
+				request.put(function(updatedEntity) {
+				}, routeObject);
 			});
 		});
 		container.appendChild(mapDiv);

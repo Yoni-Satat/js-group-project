@@ -96,14 +96,16 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
 
   server.put('/api/routes/:id', function(req, res) {
 
-    db.collection('fav_routes').update({_id: new ObjectID(req.params.id)}, {$set: {title: "Yoni", done: false }}, function(err, success) {
+		//do validation
+		//return 400 if object is not valid
+    db.collection('fav_routes').update({_id: new ObjectID(req.params.id)}, {$set: req.body}, function(err, success) {
       if(err) {
         console.log(err);
-        res.status(400);
+        res.status(500);
         res.send();
         return;
       }
-      res.status(201);
+      res.status(204);
       res.send();
     });
   });

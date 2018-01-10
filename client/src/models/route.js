@@ -1,8 +1,7 @@
-const Route = function(title, start, end) {
-  this.title = title;
+const Route = function(start, end, done) {
   this.start = start;
   this.end = end;
-  this.done = false;
+  this.done = done;
 };
 
 Route.prototype.toggleDone = function() {
