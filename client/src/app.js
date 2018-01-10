@@ -86,6 +86,7 @@ const homeFunction = function () {
 }
 
 const saveButtonFunction = function () {
+	console.log('new save function hit');
   const saveButton = document.querySelector('button');
   saveButton.innerText = "Save";
   const form = document.querySelector('#save-location');
@@ -103,10 +104,15 @@ const goButtonFunction = function () {
 		directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
 	});
 
-	const saveRouteButton = document.querySelector('#save-route');
-	saveRouteButton.removeEventListener('click', saveRouteFunction);
-	saveRouteButton.addEventListener('click', saveRouteFunction);
-  saveButtonFunction();
+  const saveButton = document.createElement('button');
+  saveButton.innerText = "Save";
+  const form = document.querySelector('#save-location');
+  form.appendChild(saveButton);
+	saveButton.addEventListener('click', saveRouteFunction);
+
+	// const saveRouteButton = document.querySelector('#save-route');
+	// saveRouteButton.removeEventListener('click', saveRouteFunction);
+	// saveRouteButton.addEventListener('click', saveRouteFunction);
 };
 
 const saveRouteFunction = function () {
