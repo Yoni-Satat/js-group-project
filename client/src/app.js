@@ -29,6 +29,8 @@ const homeFunction = function () {
 
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
+	const form = document.querySelector('#save-location');
+	form.innerHTML = "";
 	if (container.innerHTML !== "") {
 		container.innerHTML = "";
 	}
@@ -84,6 +86,16 @@ const homeFunction = function () {
 	goButton.addEventListener('click', goButtonFunction);
 }
 
+const saveButtonFunction = function () {
+  const saveButton = document.querySelector('button');
+  saveButton.innerText = "Save";
+  const form = document.querySelector('#save-location');
+  form.appendChild(saveButton);
+	saveButton.addEventListener('click', saveRouteFunction);
+}
+
+
+
 const goButtonFunction = function () {
 	const directionsWrapper = new DirectionsWrapper();
 	const mapWrapper = new MapWrapper();
@@ -93,12 +105,31 @@ const goButtonFunction = function () {
 		const map = mapWrapper.newMap(container, geoLocation, 7);
 		directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
 	});
-	const saveRouteButton = document.querySelector('#save-route');
-	saveRouteButton.removeEventListener('click', saveRouteFunction);
-	saveRouteButton.addEventListener('click', saveRouteFunction);
+
+	console.log('new save function hit');
+  const saveButton = document.createElement('button');
+  saveButton.innerText = "Save";
+	saveButton.id="save-button"
+  const form = document.querySelector('#save-location');
+  form.appendChild(saveButton);
+	saveButton.addEventListener('click', saveRouteFunction);
+
+	// const saveRouteButton = document.querySelector('#save-route');
+	// saveRouteButton.removeEventListener('click', saveRouteFunction);
+	// saveRouteButton.addEventListener('click', saveRouteFunction);
 };
 
+const updateButton = function () {
+
+}
+
 const saveRouteFunction = function () {
+	console.log('update hit');
+	const saveButton = document.querySelector('#save-button');
+	saveButton.className="hvr-icon-bounce";
+	saveButton.innerText= "saved";
+	saveButton.disabled = true;
+	console.log('saving');
 	const mapWrapper = new MapWrapper();
 	const destinationInput = document.querySelector('#destination-input');
 	const finish = destinationInput.value;
@@ -122,6 +153,8 @@ const saveRouteFunction = function () {
 const displayRoutes = function () {
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
+	const form = document.querySelector('#save-location');
+	form.innerHTML = "";
 	if (container.innerHTML !== "") {
 		container.innerHTML = "";
 	}
@@ -150,12 +183,15 @@ const displayRoutes = function () {
 			liEnd.innerText = route.end;
 			const deleteBtn = document.createElement('button');
 			deleteBtn.innerText = 'Delete';
+<<<<<<< HEAD
+=======
 			const done = document.createElement('button');
 			if (route.done) {
 				done.innerText = 'Route completed'
 			} else {
 				done.innerText = 'Mark done';
 			}
+>>>>>>> 2079a2eeb6fe5485bd50042ed3f3591816409809
 			const liShowOnMap = document.createElement('button');
 			liShowOnMap.innerText = 'Display on map';
 			const line = document.createElement('hr');
@@ -203,6 +239,8 @@ const exploreFunction = function () {
 	const mapWrapper = new MapWrapper();
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
+	const form = document.querySelector('#save-location');
+	form.innerHTML = "";
 
 	container.classList.remove("list-contain");
 	container.classList.add("container");
