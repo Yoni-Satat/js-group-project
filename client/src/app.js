@@ -111,10 +111,11 @@ const saveRouteFunction = function () {
 
 const displayRoutes = function () {
 	const container = document.querySelector('#container');
-	while (container.firstChild) {
-		container.removeChild(container.firstChild);
-	}
 	const homeForm = document.querySelector('#home-form');
+  if (container.firstChild) {
+    container.removeChild(container.firstChild);
+		homeForm.innerHTML = "";
+  }
 	const directionsWrapper = new DirectionsWrapper();
 	const mapWrapper = new MapWrapper();
 
