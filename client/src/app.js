@@ -183,15 +183,12 @@ const displayRoutes = function () {
 			liEnd.innerText = route.end;
 			const deleteBtn = document.createElement('button');
 			deleteBtn.innerText = 'Delete';
-<<<<<<< HEAD
-=======
 			const done = document.createElement('button');
 			if (route.done) {
 				done.innerText = 'Route completed'
 			} else {
 				done.innerText = 'Mark done';
 			}
->>>>>>> 2079a2eeb6fe5485bd50042ed3f3591816409809
 			const liShowOnMap = document.createElement('button');
 			liShowOnMap.innerText = 'Display on map';
 			const line = document.createElement('hr');
