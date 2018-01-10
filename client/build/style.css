@@ -5,6 +5,10 @@ font-family: 'Scope One', serif;
   margin: 2%;
 }
 
+#map {
+  width: 350px;
+  height: 350px;
+}
 
 h1 {
   font-family: 'Lora', serif;
@@ -16,12 +20,15 @@ h1 {
 
 
 nav {
+  margin-top: 2%;
+  margin-left: -15px;
   border-style: solid;
   border-width: thick;
   border-color: red;
   display: flex;
   border-width: medium;
-  width: 100%;
+  background-color: white;
+  width: 102%;
   justify-content: center;
   margin-bottom: 20px;
 }
@@ -45,7 +52,7 @@ nav {
   width: 60%;
   justify-content: center;
   margin: auto;
-  margin-top: 5%;
+  margin-top: 15%;
   text-align: justify;
   margin: auto;
 }

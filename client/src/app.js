@@ -24,7 +24,7 @@ const app = function() {
     const destinationInput = document.createElement('input');
     destinationInput.id = "destination-input"
     const feildLabel = document.createElement('label');
-    feildLabel.innerText = 'destination';
+    feildLabel.innerText = 'Destination';
     // feildLabel.id = 'destination-input';
     const locationLabel = document.createElement('label');
     locationLabel.innerText = 'From My Location';
@@ -33,7 +33,7 @@ const app = function() {
     checkBox.type = 'checkbox';
     homeForm.appendChild(feildLabel);
     homeForm.appendChild(destinationInput);
-    homeForm.appendChild(lineBreak);
+    // homeForm.appendChild(lineBreak);
 		// container.appendChild(locationLabel);
 		// container.appendChild(checkBox);
 
@@ -81,13 +81,14 @@ const app = function() {
 
 	const displayRoutes = function () {
 		const container = document.querySelector('#container');
+    homeForm = document.querySelector('#home-form');
+
 		container.innerHTML = "";
     homeForm.innerHTML = "";
 
 
 		const mapDiv = document.createElement('div');
 		mapDiv.id = 'map';
-		container.appendChild(mapDiv);
 
 		const request = new Request('http://localhost:3000/api/routes');
 
@@ -113,6 +114,7 @@ const app = function() {
 					directionsWrapper.calculateAndDisplayRoute(map, route.start, route.end);
 				});
 			});
+      container.appendChild(mapDiv);
 		});
 	}
 
