@@ -129,6 +129,7 @@ const saveRouteFunction = function () {
 	const saveButton = document.querySelector('#save-button');
 	saveButton.className="hvr-icon-bounce";
 	saveButton.innerText= "saved";
+	saveButton.disabled = true;
 	console.log('saving');
 	const mapWrapper = new MapWrapper();
 	const destinationInput = document.querySelector('#destination-input');
