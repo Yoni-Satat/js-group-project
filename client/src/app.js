@@ -75,7 +75,6 @@ const goButtonFunction = function () {
 	const directionsWrapper = new DirectionsWrapper();
 	const mapWrapper = new MapWrapper();
 	const destinationInput = document.querySelector('#destination-input');
-	console.log(destinationInput.value);
 	const finish = destinationInput.value;
 	mapWrapper.geoLocate(function(geoLocation){
 		const map = mapWrapper.newMap(container, geoLocation, 7);
@@ -89,7 +88,8 @@ const goButtonFunction = function () {
 const displayRoutes = function () {
 	const container = document.querySelector('#container');
 	homeForm = document.querySelector('#home-form');
-	directionsWrapper = new DirectionsWrapper();
+	const directionsWrapper = new DirectionsWrapper();
+	const mapWrapper = new MapWrapper();
 
 	container.innerHTML = "";
 	homeForm.innerHTML = "";
