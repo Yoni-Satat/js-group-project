@@ -54,12 +54,19 @@ const homeFunction = function () {
 	const checkBox = document.createElement('input');
 	checkBox.type = 'checkbox';
 	homeForm.appendChild(feildLabel);
+	destinationInput.disabled = true;
+	destinationInput.placeholder = 'Fetching location';
 	homeForm.appendChild(destinationInput);
 	// homeForm.appendChild(lineBreak);
 	// container.appendChild(locationLabel);
 	// container.appendChild(checkBox);
+	const mapWrapper = new MapWrapper();
+	mapWrapper.geoLocate(function(geoLocation){
+		destinationInput.disabled = false;
+		destinationInput.placeholder = 'Enter a location';
+		autoComplete.autoCompleteBox(destinationInput, geoLocation);
+	});
 
-	autoComplete.autoCompleteBox(destinationInput);
 
 	const goButton = document.createElement('button');
 	goButton.className = 'hvr-underline-from-center';
@@ -105,7 +112,7 @@ const saveRouteFunction = function () {
 		addressRequest.get(function(address) {
 			const addressDetails = address.results[0].address_components;
 			const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
-			const route = new Route(null, start, finish);
+			const route = new Route(null, start, finish, done);
 			const request = new Request('http://localhost:3000/api/routes');
 			request.post(function(addedEntity) {
 			}, route);
