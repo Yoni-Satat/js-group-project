@@ -30,14 +30,16 @@ const homeFunction = function () {
 
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
-	if (container.firstChild) {
-		container.removeChild(container.firstChild);
+	if (container.innerHTML !== "") {
+		container.innerHTML = "";
+	}
+	if (homeForm.innerHTML !== "") {
 		homeForm.innerHTML = "";
 	}
 
-	container.id = 'container'
+	container.classList.remove("list-contain");
+	container.classList.add("container");
 
-	container.innerHTML = "";
 	const lineBreak = document.createElement('br');
 	const lineBreakTwo = document.createElement('br');
 
@@ -52,12 +54,19 @@ const homeFunction = function () {
 	const checkBox = document.createElement('input');
 	checkBox.type = 'checkbox';
 	homeForm.appendChild(feildLabel);
+	destinationInput.disabled = true;
+	destinationInput.placeholder = 'Fetching location';
 	homeForm.appendChild(destinationInput);
 	// homeForm.appendChild(lineBreak);
 	// container.appendChild(locationLabel);
 	// container.appendChild(checkBox);
+	const mapWrapper = new MapWrapper();
+	mapWrapper.geoLocate(function(geoLocation){
+		destinationInput.disabled = false;
+		destinationInput.placeholder = 'Enter a location';
+		autoComplete.autoCompleteBox(destinationInput, geoLocation);
+	});
 
-	autoComplete.autoCompleteBox(destinationInput);
 
 	const goButton = document.createElement('button');
 	goButton.className = 'hvr-underline-from-center';
@@ -112,7 +121,7 @@ const saveRouteFunction = function () {
 		addressRequest.get(function(address) {
 			const addressDetails = address.results[0].address_components;
 			const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
-			const route = new Route(null, start, finish);
+			const route = new Route(null, start, finish, done);
 			const request = new Request('http://localhost:3000/api/routes');
 			request.post(function(addedEntity) {
 			}, route);
@@ -123,20 +132,22 @@ const saveRouteFunction = function () {
 const displayRoutes = function () {
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
-	if (container.firstChild) {
-		container.removeChild(container.firstChild);
+	if (container.innerHTML !== "") {
+		container.innerHTML = "";
+	}
+	if (homeForm.innerHTML !== "") {
 		homeForm.innerHTML = "";
 	}
+	container.classList.remove("container");
+	container.classList.add("list-contain");
 
 	const directionsWrapper = new DirectionsWrapper();
 	const mapWrapper = new MapWrapper();
 
 	const mapDiv = document.createElement('div');
 	mapDiv.id = 'map';
-
 	ulBox = document.createElement('div');
 	ulBox.className="list-box";
-	container.appendChild(ulBox);
 
 	const request = new Request('http://localhost:3000/api/routes');
 
@@ -153,6 +164,7 @@ const displayRoutes = function () {
 			liShowOnMap.innerText = 'Display on map';
 			const line = document.createElement('hr');
 			ulDisplayRoutes.className = "hvr-underline-from-left";
+			container.appendChild(ulBox);
 			ulBox.appendChild(ulDisplayRoutes);
 			ulDisplayRoutes.appendChild(liStart);
 			ulDisplayRoutes.appendChild(liEnd);
@@ -183,8 +195,14 @@ const exploreFunction = function () {
 	const mapWrapper = new MapWrapper();
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
-	if (container.firstChild) {
-		container.removeChild(container.firstChild);
+
+	container.classList.remove("list-contain");
+	container.classList.add("container");
+
+	if (container.innerHTML !== "") {
+		container.innerHTML = "";
+	}
+	if (homeForm.innerHTML !== "") {
 		homeForm.innerHTML = "";
 	}
 

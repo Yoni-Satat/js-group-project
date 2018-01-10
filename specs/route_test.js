@@ -5,12 +5,7 @@ describe('Route', function() {
   let route1;
 
   beforeEach(function() {
-    route1 = new Route('this is an ID', 'school', 'Edinburgh', 'Aberdeen' );
-
-  });
-
-  it('should have an ID', function() {
-    assert.strictEqual(route1.id, 'this is an ID');
+    route1 = new Route('school', 'Edinburgh', 'Aberdeen', false);
   });
 
   it('should have a title', function() {
@@ -24,5 +19,10 @@ describe('Route', function() {
   it('should have a end point', function() {
     assert.strictEqual(route1.end, 'Aberdeen');
   });
+
+  it('should toggle done', function() {
+    route1.toggleDone();
+    assert.strictEqual(route1.done, true);
+  })
 
 });
