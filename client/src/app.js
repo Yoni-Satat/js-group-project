@@ -95,7 +95,6 @@ const displayRoutes = function () {
 	container.id = "list-contain";
 	homeForm.innerHTML = "";
 
-
 	const mapDiv = document.createElement('div');
 	mapDiv.id = 'map';
 
@@ -153,16 +152,20 @@ const saveRouteFunction = function () {
 };
 
 const exploreFunction = function () {
+
 	const mapWrapper = new MapWrapper();
 	const container = document.querySelector('#container');
 	homeForm.innerHTML = "";
 
 	container.innerHTML = "";
+
 	const center = {
 		lat: 55.946962,
 		lng: -3.20195
 	}
 	const map = mapWrapper.newMap(container, center, 19);
+  ulBox.innerHTML="";
+
 };
 
 document.addEventListener('DOMContentLoaded', app);
