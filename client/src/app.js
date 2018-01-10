@@ -29,6 +29,9 @@ const homeFunction = function () {
 	autoComplete = new AutoComplete();
 
 	const container = document.querySelector('#container');
+	while (container.firstChild) {
+		container.removeChild(container.firstChild);
+	}
 	homeForm = document.querySelector('#home-form');
 	homeForm.innerHTML = "";
 
@@ -108,14 +111,12 @@ const saveRouteFunction = function () {
 
 const displayRoutes = function () {
 	const container = document.querySelector('#container');
-	homeForm = document.querySelector('#home-form');
+	while (container.firstChild) {
+		container.removeChild(container.firstChild);
+	}
+	const homeForm = document.querySelector('#home-form');
 	const directionsWrapper = new DirectionsWrapper();
 	const mapWrapper = new MapWrapper();
-
-	container.innerHTML = "";
-	container.id = "list-contain";
-	homeForm.innerHTML = "";
-
 
 	const mapDiv = document.createElement('div');
 	mapDiv.id = 'map';
@@ -164,20 +165,21 @@ const displayRoutes = function () {
 	});
 }
 
-
-
 const exploreFunction = function () {
+
 	const mapWrapper = new MapWrapper();
 	const container = document.querySelector('#container');
-	const homeForm = document.querySelector('#home-form');
-	homeForm.innerHTML = "";
+	while (container.firstChild) {
+		container.removeChild(container.firstChild);
+	}
 
-	container.innerHTML = "";
+
 	const center = {
 		lat: 55.946962,
 		lng: -3.20195
 	}
 	const map = mapWrapper.newMap(container, center, 19);
+
 };
 
 document.addEventListener('DOMContentLoaded', app);
