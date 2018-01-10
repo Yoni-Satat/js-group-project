@@ -3,7 +3,6 @@ const MapWrapper = require('./views/mapWrapper.js');
 const AutoComplete = require('./views/autoCompleteWrapper.js');
 const DirectionsWrapper = require('./views/directionsWrapper.js');
 const Route = require('./models/route.js');
-
 const app = function() {
 
 	const homeButton = document.querySelector('#home');
@@ -143,7 +142,7 @@ const saveRouteFunction = function () {
 		addressRequest.get(function(address) {
 			const addressDetails = address.results[0].address_components;
 			const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
-			const route = new Route(null, start, finish, false);
+			const route = new Route(start, finish, false);
 			const request = new Request('http://localhost:3000/api/routes');
 			request.post(function(addedEntity) {
 			}, route);
@@ -184,6 +183,15 @@ const displayRoutes = function () {
 			liEnd.innerText = route.end;
 			const deleteBtn = document.createElement('button');
 			deleteBtn.innerText = 'Delete';
+<<<<<<< HEAD
+=======
+			const done = document.createElement('button');
+			if (route.done) {
+				done.innerText = 'Route completed'
+			} else {
+				done.innerText = 'Mark done';
+			}
+>>>>>>> 2079a2eeb6fe5485bd50042ed3f3591816409809
 			const liShowOnMap = document.createElement('button');
 			liShowOnMap.innerText = 'Display on map';
 			const line = document.createElement('hr');
@@ -194,6 +202,7 @@ const displayRoutes = function () {
 			ulDisplayRoutes.appendChild(liEnd);
 			ulDisplayRoutes.appendChild(liShowOnMap);
 			ulDisplayRoutes.appendChild(deleteBtn);
+			ulDisplayRoutes.appendChild(done);
 			ulDisplayRoutes.appendChild(line);
 			liShowOnMap.addEventListener('click', function () {
 				mapDiv.innerHTML = "";
@@ -201,16 +210,27 @@ const displayRoutes = function () {
 				directionsWrapper.calculateAndDisplayRoute(map, route.start, route.end);
 			});
 			deleteBtn.addEventListener('click', function() {
-				console.log('deleteBtn clicked');
-				console.log(route._id);
 				const url = `http://localhost:3000/api/routes/${route._id}`
 				const request = new Request(url);
 				request.delete(function(deletedEntity) {
 				}, route);
 				displayRoutes();
 			});
+			const doneFunction = function () {
+				route.done = !route.done;
+				console.log(route);
+				const request = new Request(`http://localhost:3000/api/routes/${route._id}`)
+				request.put(function(updatedEntity) {
+				}, {done: route.done});
+				if (route.done) {
+					done.innerText = 'Route completed'
+				} else {
+					done.innerText = 'Mark done';
+				}
+			};
+			done.addEventListener('click', doneFunction);
+			container.appendChild(mapDiv);
 		});
-		container.appendChild(mapDiv);
 	});
 }
 
