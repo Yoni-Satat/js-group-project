@@ -185,7 +185,7 @@ const displayRoutes = function () {
 				console.log(route);
 				const request = new Request(`http://localhost:3000/api/routes/${route._id}`)
 				request.put(function(updatedEntity) {
-				}, route);
+				}, {done: route.done});
 				if (route.done) {
 					done.innerText = 'Route completed'
 				} else {
