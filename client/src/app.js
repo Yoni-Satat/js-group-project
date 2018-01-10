@@ -76,6 +76,13 @@ const homeFunction = function () {
 	goButton.addEventListener('click', goButtonFunction);
 }
 
+const saveButtonFunction = function () {
+  const saveButton = document.querySelector('button');
+  saveButton.innerText = "Save";
+  const form = document.querySelector('#save-location');
+  form.appendChild(saveButton);
+}
+
 const goButtonFunction = function () {
 	const directionsWrapper = new DirectionsWrapper();
 	const mapWrapper = new MapWrapper();
@@ -85,9 +92,11 @@ const goButtonFunction = function () {
 		const map = mapWrapper.newMap(container, geoLocation, 7);
 		directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
 	});
+
 	const saveRouteButton = document.querySelector('#save-route');
 	saveRouteButton.removeEventListener('click', saveRouteFunction);
 	saveRouteButton.addEventListener('click', saveRouteFunction);
+  saveButtonFunction();
 };
 
 const saveRouteFunction = function () {
