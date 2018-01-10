@@ -87,10 +87,9 @@ const app = function() {
     container.id = "list-contain";
     homeForm.innerHTML = "";
 
-
 		const mapDiv = document.createElement('div');
 		mapDiv.id = 'map';
-    const ulBox = document.createElement('div');
+    ulBox = document.createElement('div');
     ulBox.className="list-box"
 
 		const request = new Request('http://localhost:3000/api/routes');
