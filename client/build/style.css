@@ -196,6 +196,7 @@ button {
 }
 
 .hvr-underline-from-left {
+  padding-top: 2px;
   display: inline-block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
@@ -205,6 +206,7 @@ button {
   overflow: hidden;
 }
 .hvr-underline-from-left:before {
+  padding-top: 2px;
   content: "";
   position: absolute;
   z-index: -1;
