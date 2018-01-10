@@ -1,8 +1,23 @@
 body {
-font-family: 'Scope One', serif;
-
+  font-family: 'Scope One', serif;
   text-align: center;
   margin: 2%;
+}
+
+
+
+#list-contain {
+  display: flex;
+  background-color: red;
+
+}
+
+#list-contain ul {
+  display: block;
+  text-align: left;
+  background-color: blue;
+
+
 }
 
 #map {
@@ -10,11 +25,21 @@ font-family: 'Scope One', serif;
   height: 350px;
 }
 
-ul {
-  display: flex;
-  margin-left: 0;
-  background-color: blue;
+.list-box {
+  padding: 5px;
+  margin: 5px;
+  display: block;
+  align-content: flex-start;
+  flex-direction: column;
+  width: 50%;
+  background-color: teal;
 }
+
+/*li {
+  display: block;
+  background-color: green;
+  width: 50%;
+}*/
 
 h1 {
   font-family: 'Lora', serif;

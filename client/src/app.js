@@ -84,16 +84,20 @@ const app = function() {
     homeForm = document.querySelector('#home-form');
 
 		container.innerHTML = "";
+    container.id = "list-contain";
     homeForm.innerHTML = "";
 
 
 		const mapDiv = document.createElement('div');
 		mapDiv.id = 'map';
+    const ulBox = document.createElement('div');
+    ulBox.className="list-box"
 
 		const request = new Request('http://localhost:3000/api/routes');
 
 		request.get(function(savedRoutes) {
 			savedRoutes.forEach(function(route) {
+
 				const ulDisplayRoutes = document.createElement('ul');
 				const liStart = document.createElement('li');
 				liStart.innerText = route.start;
@@ -102,8 +106,9 @@ const app = function() {
 				const liShowOnMap = document.createElement('li');
 				liShowOnMap.innerText = 'Display on map';
 				const line = document.createElement('hr');
-				container.appendChild(ulDisplayRoutes);
+				container.appendChild(ulBox);
         ulDisplayRoutes.className = "hvr-underline-from-left";
+        ulBox.appendChild(ulDisplayRoutes);
 				ulDisplayRoutes.appendChild(liStart);
 				ulDisplayRoutes.appendChild(liEnd);
 				ulDisplayRoutes.appendChild(liShowOnMap);
