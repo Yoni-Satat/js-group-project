@@ -35,6 +35,8 @@ const homeFunction = function () {
 		homeForm.innerHTML = "";
 	}
 
+	container.id = 'container'
+
 	container.innerHTML = "";
 	const lineBreak = document.createElement('br');
 	const lineBreakTwo = document.createElement('br');
