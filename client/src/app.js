@@ -88,13 +88,14 @@ const homeFunction = function () {
 }
 
 const saveButtonFunction = function () {
-	console.log('new save function hit');
   const saveButton = document.querySelector('button');
   saveButton.innerText = "Save";
   const form = document.querySelector('#save-location');
   form.appendChild(saveButton);
 	saveButton.addEventListener('click', saveRouteFunction);
 }
+
+
 
 const goButtonFunction = function () {
 	const directionsWrapper = new DirectionsWrapper();
@@ -109,6 +110,7 @@ const goButtonFunction = function () {
 	console.log('new save function hit');
   const saveButton = document.createElement('button');
   saveButton.innerText = "Save";
+	saveButton.id="save-button"
   const form = document.querySelector('#save-location');
   form.appendChild(saveButton);
 	saveButton.addEventListener('click', saveRouteFunction);
@@ -118,7 +120,15 @@ const goButtonFunction = function () {
 	// saveRouteButton.addEventListener('click', saveRouteFunction);
 };
 
+const updateButton = function () {
+
+}
+
 const saveRouteFunction = function () {
+	console.log('update hit');
+	const saveButton = document.querySelector('#save-button');
+	saveButton.className="hvr-icon-bounce";
+	saveButton.innerText= "saved";
 	console.log('saving');
 	const mapWrapper = new MapWrapper();
 	const destinationInput = document.querySelector('#destination-input');
@@ -173,7 +183,7 @@ const displayRoutes = function () {
 			liEnd.innerText = route.end;
 			const deleteBtn = document.createElement('button');
 			deleteBtn.innerText = 'Delete';
-			const liShowOnMap = document.createElement('li');
+			const liShowOnMap = document.createElement('button');
 			liShowOnMap.innerText = 'Display on map';
 			const line = document.createElement('hr');
 			ulDisplayRoutes.className = "hvr-underline-from-left";
