@@ -151,7 +151,11 @@ const displayRoutes = function () {
 			const deleteBtn = document.createElement('button');
 			deleteBtn.innerText = 'Delete';
 			const done = document.createElement('button');
-			done.innerText = 'Mark done';
+			if (route.done) {
+				done.innerText = 'Route completed'
+			} else {
+				done.innerText = 'Mark done';
+			}
 			const liShowOnMap = document.createElement('button');
 			liShowOnMap.innerText = 'Display on map';
 			const line = document.createElement('hr');
@@ -176,16 +180,21 @@ const displayRoutes = function () {
 				}, route);
 				displayRoutes();
 			});
-			done.addEventListener('click', function () {
-				const routeObject = new Route(route.start, route.end, route.done);
-				routeObject.toggleDone();
-				console.log(routeObject);
+			const doneFunction = function () {
+				route.done = !route.done;
+				console.log(route);
 				const request = new Request(`http://localhost:3000/api/routes/${route._id}`)
 				request.put(function(updatedEntity) {
-				}, routeObject);
-			});
+				}, route);
+				if (route.done) {
+					done.innerText = 'Route completed'
+				} else {
+					done.innerText = 'Mark done';
+				}
+			};
+			done.addEventListener('click', doneFunction);
+			container.appendChild(mapDiv);
 		});
-		container.appendChild(mapDiv);
 	});
 }
 
