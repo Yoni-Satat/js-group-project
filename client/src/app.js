@@ -85,6 +85,27 @@ const goButtonFunction = function () {
 	saveRouteButton.addEventListener('click', saveRouteFunction);
 };
 
+const saveRouteFunction = function () {
+	const mapWrapper = new MapWrapper();
+	const destinationInput = document.querySelector('#destination-input');
+	const finish = destinationInput.value;
+	mapWrapper.geoLocate(function(geoLocation){
+		const lat = geoLocation.lat;
+		const lng = geoLocation.lng;
+		console.log(geoLocation);
+		const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAobv2IGaN5L5BmVSJAVtsuAaK2MXL9mic`
+		const addressRequest = new Request(url)
+		addressRequest.get(function(address) {
+			const addressDetails = address.results[0].address_components;
+			const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
+			const route = new Route(null, start, finish);
+			const request = new Request('http://localhost:3000/api/routes');
+			request.post(function(addedEntity) {
+			}, route);
+		});
+	});
+};
+
 const displayRoutes = function () {
 	const container = document.querySelector('#container');
 	homeForm = document.querySelector('#home-form');
@@ -121,7 +142,7 @@ const displayRoutes = function () {
 			ulDisplayRoutes.appendChild(liEnd);
 			ulDisplayRoutes.appendChild(liShowOnMap);
 			ulDisplayRoutes.appendChild(line);
-			ulDisplayRoutes.addEventListener('click', function () {
+			liShowOnMap.addEventListener('click', function () {
 				mapDiv.innerHTML = "";
 				const map = mapWrapper.newMap(mapDiv, {lat: 55.9469, lng: -3.2015}, 2);
 				directionsWrapper.calculateAndDisplayRoute(map, route.start, route.end);
@@ -130,27 +151,6 @@ const displayRoutes = function () {
 		container.appendChild(mapDiv);
 	});
 }
-
-const saveRouteFunction = function () {
-	const mapWrapper = new MapWrapper();
-	const destinationInput = document.querySelector('#destination-input');
-	const finish = destinationInput.value;
-	mapWrapper.geoLocate(function(geoLocation){
-		const lat = geoLocation.lat;
-		const lng = geoLocation.lng;
-		console.log(geoLocation);
-		const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAobv2IGaN5L5BmVSJAVtsuAaK2MXL9mic`
-		const addressRequest = new Request(url)
-		addressRequest.get(function(address) {
-			const addressDetails = address.results[0].address_components;
-			const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
-			const route = new Route(null, start, finish);
-			const request = new Request('http://localhost:3000/api/routes');
-			request.post(function(addedEntity) {
-			}, route);
-		});
-	});
-};
 
 const exploreFunction = function () {
 	const mapWrapper = new MapWrapper();
