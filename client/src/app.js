@@ -50,12 +50,19 @@ const homeFunction = function () {
 	const checkBox = document.createElement('input');
 	checkBox.type = 'checkbox';
 	homeForm.appendChild(feildLabel);
+	destinationInput.disabled = true;
+	destinationInput.placeholder = 'Fetching location';
 	homeForm.appendChild(destinationInput);
 	// homeForm.appendChild(lineBreak);
 	// container.appendChild(locationLabel);
 	// container.appendChild(checkBox);
+	const mapWrapper = new MapWrapper();
+	mapWrapper.geoLocate(function(geoLocation){
+		destinationInput.disabled = false;
+		destinationInput.placeholder = 'Enter a location';
+		autoComplete.autoCompleteBox(destinationInput, geoLocation);
+	});
 
-	autoComplete.autoCompleteBox(destinationInput);
 
 	const goButton = document.createElement('button');
 	goButton.className = 'hvr-underline-from-center';

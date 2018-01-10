@@ -1,5 +1,5 @@
 const MapWrapper = function () {
-	
+
 }
 
 MapWrapper.prototype.newMap = function (container, coords, zoom) {
@@ -38,6 +38,7 @@ MapWrapper.prototype.addInfoWindow = function (coords, text) {
 
 MapWrapper.prototype.geoLocate = function (callback) {
 	navigator.geolocation.getCurrentPosition(function (position) {
+
 		const center = {
 			lat: position.coords.latitude,
 			lng: position.coords.longitude

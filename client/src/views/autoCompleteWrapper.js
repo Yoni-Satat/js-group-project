@@ -6,8 +6,19 @@ const AutoComplete = function (map) {
   this.map = map;
 }
 
-AutoComplete.prototype.autoCompleteBox = function (selectedId) {
-  var autocomplete = new google.maps.places.Autocomplete(selectedId);
+AutoComplete.prototype.autoCompleteBox = function (selectedId, geolocation) {
+
+	// const geolocation = {
+	// 	lat: 55.953252,
+	// 	lng: -3.188267
+	// }
+
+	const circle = new google.maps.Circle({
+        center: geolocation,
+        radius: 50000
+  });
+
+  var autocomplete = new google.maps.places.Autocomplete(selectedId, circle);
   return autocomplete;
 }
 
