@@ -26,52 +26,52 @@ const app = function() {
 
 const homeFunction = function () {
 
-	autoComplete = new AutoComplete();
+  autoComplete = new AutoComplete();
 
-	const container = document.querySelector('#container');
-	while (container.firstChild) {
-		container.removeChild(container.firstChild);
-	}
-	homeForm = document.querySelector('#home-form');
-	homeForm.innerHTML = "";
+  const container = document.querySelector('#container');
+	const homeForm = document.querySelector('#home-form');
+  if (container.firstChild) {
+    container.removeChild(container.firstChild);
+		homeForm.innerHTML = "";
+  }
 
-	container.innerHTML = "";
-	const lineBreak = document.createElement('br');
-	const lineBreakTwo = document.createElement('br');
+  container.innerHTML = "";
+  const lineBreak = document.createElement('br');
+  const lineBreakTwo = document.createElement('br');
 
-	const destinationInput = document.createElement('input');
-	destinationInput.id = "destination-input"
-	const feildLabel = document.createElement('label');
-	feildLabel.innerText = 'Destination';
-	// feildLabel.id = 'destination-input';
-	const locationLabel = document.createElement('label');
-	locationLabel.innerText = 'From My Location';
-	locationLabel.id = 'destination-label';
-	const checkBox = document.createElement('input');
-	checkBox.type = 'checkbox';
-	homeForm.appendChild(feildLabel);
-	homeForm.appendChild(destinationInput);
-	// homeForm.appendChild(lineBreak);
-	// container.appendChild(locationLabel);
-	// container.appendChild(checkBox);
+  const destinationInput = document.createElement('input');
+  destinationInput.id = "destination-input"
+  const feildLabel = document.createElement('label');
+  feildLabel.innerText = 'Destination';
+  // feildLabel.id = 'destination-input';
+  const locationLabel = document.createElement('label');
+  locationLabel.innerText = 'From My Location';
+  // locationLabel.id = 'destination-label';
+  const checkBox = document.createElement('input');
+  checkBox.type = 'checkbox';
+  homeForm.appendChild(feildLabel);
+  homeForm.appendChild(destinationInput);
+  // homeForm.appendChild(lineBreak);
+  // container.appendChild(locationLabel);
+  // container.appendChild(checkBox);
 
-	autoComplete.autoCompleteBox(destinationInput);
+  autoComplete.autoCompleteBox(destinationInput);
 
-	const goButton = document.createElement('button');
-	goButton.className = 'hvr-underline-from-center';
+  const goButton = document.createElement('button');
+  goButton.className = 'hvr-underline-from-center';
 
-	goButton.innerText = 'Go';
-	container.appendChild(goButton);
+  goButton.innerText = 'Go';
+  container.appendChild(goButton);
 
-	checkBox.removeEventListener('click', function() {
-		console.log('checked')
-	});
-	checkBox.addEventListener('click', function() {
-		console.log('checked');
-	});
+  checkBox.removeEventListener('click', function() {
+    console.log('checked')
+  });
+  checkBox.addEventListener('click', function() {
+    console.log('checked');
+  });
 
-	goButton.removeEventListener('click', goButtonFunction);
-	goButton.addEventListener('click', goButtonFunction);
+  goButton.removeEventListener('click', goButtonFunction);
+  goButton.addEventListener('click', goButtonFunction);
 }
 
 const goButtonFunction = function () {
@@ -167,12 +167,13 @@ const displayRoutes = function () {
 
 const exploreFunction = function () {
 
-	const mapWrapper = new MapWrapper();
+  const mapWrapper = new MapWrapper();
 	const container = document.querySelector('#container');
-	while (container.firstChild) {
-		container.removeChild(container.firstChild);
-	}
-
+	const homeForm = document.querySelector('#home-form');
+  if (container.firstChild) {
+    container.removeChild(container.firstChild);
+		homeForm.innerHTML = "";
+  }
 
 	const center = {
 		lat: 55.946962,
