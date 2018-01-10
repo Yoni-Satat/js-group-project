@@ -8,14 +8,14 @@ body {
 
 #list-contain {
   display: flex;
-  background-color: red;
+  /*background-color: red;*/
 
 }
 
 #list-contain ul {
   display: block;
   text-align: left;
-  background-color: blue;
+  /*background-color: grey;*/
 
 
 }
@@ -32,7 +32,7 @@ body {
   align-content: flex-start;
   flex-direction: column;
   width: 50%;
-  background-color: teal;
+  /*background-color: teal;*/
 }
 
 /*li {
