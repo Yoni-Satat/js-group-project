@@ -30,6 +30,8 @@ const homeFunction = function () {
 
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
+	const form = document.querySelector('#save-location');
+	form.innerHTML = "";
 	if (container.innerHTML !== "") {
 		container.innerHTML = "";
 	}
@@ -104,6 +106,7 @@ const goButtonFunction = function () {
 		directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
 	});
 
+	console.log('new save function hit');
   const saveButton = document.createElement('button');
   saveButton.innerText = "Save";
   const form = document.querySelector('#save-location');
@@ -140,6 +143,8 @@ const saveRouteFunction = function () {
 const displayRoutes = function () {
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
+	const form = document.querySelector('#save-location');
+	form.innerHTML = "";
 	if (container.innerHTML !== "") {
 		container.innerHTML = "";
 	}
@@ -203,6 +208,8 @@ const exploreFunction = function () {
 	const mapWrapper = new MapWrapper();
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
+	const form = document.querySelector('#save-location');
+	form.innerHTML = "";
 
 	container.classList.remove("list-contain");
 	container.classList.add("container");
