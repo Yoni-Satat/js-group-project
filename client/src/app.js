@@ -29,11 +29,11 @@ const homeFunction = function () {
   autoComplete = new AutoComplete();
 
   const container = document.querySelector('#container');
-  while (container.firstChild) {
+	const homeForm = document.querySelector('#home-form');
+  if (container.firstChild) {
     container.removeChild(container.firstChild);
+		homeForm.innerHTML = "";
   }
-  homeForm = document.querySelector('#home-form');
-  homeForm.innerHTML = "";
 
   container.innerHTML = "";
   const lineBreak = document.createElement('br');
@@ -46,7 +46,7 @@ const homeFunction = function () {
   // feildLabel.id = 'destination-input';
   const locationLabel = document.createElement('label');
   locationLabel.innerText = 'From My Location';
-  locationLabel.id = 'destination-label';
+  // locationLabel.id = 'destination-label';
   const checkBox = document.createElement('input');
   checkBox.type = 'checkbox';
   homeForm.appendChild(feildLabel);
@@ -90,11 +90,12 @@ const goButtonFunction = function () {
 
 const displayRoutes = function () {
 
-  const container = document.querySelector('#container');
-  while (container.firstChild) {
+	const container = document.querySelector('#container');
+	const homeForm = document.querySelector('#home-form');
+  if (container.firstChild) {
     container.removeChild(container.firstChild);
+		homeForm.innerHTML = "";
   }
-  const homeForm = document.querySelector('#home-form');
   const directionsWrapper = new DirectionsWrapper();
   const mapWrapper = new MapWrapper();
 
@@ -162,9 +163,11 @@ const saveRouteFunction = function () {
 const exploreFunction = function () {
 
   const mapWrapper = new MapWrapper();
-  const container = document.querySelector('#container');
-  while (container.firstChild) {
+	const container = document.querySelector('#container');
+	const homeForm = document.querySelector('#home-form');
+  if (container.firstChild) {
     container.removeChild(container.firstChild);
+		homeForm.innerHTML = "";
   }
 
 
