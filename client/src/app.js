@@ -90,6 +90,7 @@ const saveButtonFunction = function () {
   saveButton.innerText = "Save";
   const form = document.querySelector('#save-location');
   form.appendChild(saveButton);
+	saveButton.addEventListener('click', saveRouteFunction);
 }
 
 const goButtonFunction = function () {
@@ -109,6 +110,7 @@ const goButtonFunction = function () {
 };
 
 const saveRouteFunction = function () {
+	console.log('saving');
 	const mapWrapper = new MapWrapper();
 	const destinationInput = document.querySelector('#destination-input');
 	const finish = destinationInput.value;
