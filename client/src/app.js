@@ -132,6 +132,8 @@ const displayRoutes = function () {
 			liStart.innerText = route.start;
 			const liEnd = document.createElement('li');
 			liEnd.innerText = route.end;
+			const deleteBtn = document.createElement('button');
+			deleteBtn.innerText = 'Delete';
 			const liShowOnMap = document.createElement('li');
 			liShowOnMap.innerText = 'Display on map';
 			const line = document.createElement('hr');
@@ -141,16 +143,28 @@ const displayRoutes = function () {
 			ulDisplayRoutes.appendChild(liStart);
 			ulDisplayRoutes.appendChild(liEnd);
 			ulDisplayRoutes.appendChild(liShowOnMap);
+			ulDisplayRoutes.appendChild(deleteBtn);
 			ulDisplayRoutes.appendChild(line);
 			liShowOnMap.addEventListener('click', function () {
 				mapDiv.innerHTML = "";
 				const map = mapWrapper.newMap(mapDiv, {lat: 55.9469, lng: -3.2015}, 2);
 				directionsWrapper.calculateAndDisplayRoute(map, route.start, route.end);
 			});
+			deleteBtn.addEventListener('click', function() {
+				console.log('deleteBtn clicked');
+				console.log(route._id);
+				const url = `http://localhost:3000/api/routes/${route._id}`
+				const request = new Request(url);
+				request.delete(function(deletedEntity) {
+				}, route);
+				displayRoutes();
+			});
 		});
 		container.appendChild(mapDiv);
 	});
 }
+
+
 
 const exploreFunction = function () {
 	const mapWrapper = new MapWrapper();
