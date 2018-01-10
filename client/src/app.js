@@ -45,38 +45,45 @@ const app = function() {
 		goButton.innerText = 'Go';
 		container.appendChild(goButton);
 
+		checkBox.removeEventListener('click', function() {
+			console.log('checked')
+		});
 		checkBox.addEventListener('click', function() {
 			console.log('checked');
 		});
 
-		goButton.addEventListener('click', function() {
+		const goButtonFunction = function () {
 			const finish = destinationInput.value;
 			mapWrapper.geoLocate(function(geoLocation){
 				const map = mapWrapper.newMap(container, geoLocation, 7);
 				directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
 			});
 			const saveRouteButton = document.querySelector('#save-route');
+			saveRouteButton.removeEventListener('click', saveRouteFunction);
+			saveRouteButton.addEventListener('click', saveRouteFunction);
+		};
 
-			saveRouteButton.addEventListener('click', function() {
-				mapWrapper.geoLocate(function(geoLocation){
-					const lat = geoLocation.lat;
-					const lng = geoLocation.lng;
-					console.log(geoLocation);
-					const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAobv2IGaN5L5BmVSJAVtsuAaK2MXL9mic`
-					const addressRequest = new Request(url)
-					addressRequest.get(function(address) {
-						const addressDetails = address.results[0].address_components;
-						const addressToDisplay = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
-
-						const start = addressToDisplay;
-						const route = new Route(null, start, finish);
-						const request = new Request('http://localhost:3000/api/routes');
-						request.post(function(addedEntity) {
-						}, route);
-					});
+		const saveRouteFunction = function () {
+			const finish = destinationInput.value;
+			mapWrapper.geoLocate(function(geoLocation){
+				const lat = geoLocation.lat;
+				const lng = geoLocation.lng;
+				console.log(geoLocation);
+				const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAobv2IGaN5L5BmVSJAVtsuAaK2MXL9mic`
+				const addressRequest = new Request(url)
+				addressRequest.get(function(address) {
+					const addressDetails = address.results[0].address_components;
+					const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
+					const route = new Route(null, start, finish);
+					const request = new Request('http://localhost:3000/api/routes');
+					request.post(function(addedEntity) {
+					}, route);
 				});
 			});
-		});
+		};
+
+		goButton.removeEventListener('click', goButtonFunction);
+		goButton.addEventListener('click', goButtonFunction);
 	}
 
 	const displayRoutes = function () {
@@ -131,13 +138,11 @@ const app = function() {
 		const map = mapWrapper.newMap(container, center, 19);
 	};
 
-	const resetContainer = function () {
-		const container = document.querySelector('#container').innerHTML = "";
-		console.log('reset called');
-	}
-
 	const homeButton = document.querySelector('#home');
 	homeButton.addEventListener('click', homeFunction);
+
+	const listViewButton = document.querySelector('#list-view');
+	listViewButton.addEventListener('click', displayRoutes);
 
 	const aboutButton = document.querySelector('#about');
 	aboutButton.addEventListener('click', function() {
@@ -146,13 +151,6 @@ const app = function() {
 
 	const exploreButton = document.querySelector('#explore');
 	exploreButton.addEventListener('click', exploreFunction);
-
-	const listViewButton = document.querySelector('#list-view');
-	listViewButton.addEventListener('click', function() {
-		console.log('clicked');
-		displayRoutes();
-
-	});
 
 	console.log('END OF APP');
 
