@@ -109,6 +109,7 @@ const displayRoutes = function () {
 
   const ulBox = document.createElement('div');
   ulBox.className="list-box";
+	container.appendChild(ulBox);
 
   const request = new Request('http://localhost:3000/api/routes');
 
@@ -122,14 +123,13 @@ const displayRoutes = function () {
       const liShowOnMap = document.createElement('li');
       liShowOnMap.innerText = 'Display on map';
       const line = document.createElement('hr');
-      container.appendChild(ulBox);
       ulDisplayRoutes.className = "hvr-underline-from-left";
       ulBox.appendChild(ulDisplayRoutes);
       ulDisplayRoutes.appendChild(liStart);
       ulDisplayRoutes.appendChild(liEnd);
       ulDisplayRoutes.appendChild(liShowOnMap);
       ulDisplayRoutes.appendChild(line);
-      ulDisplayRoutes.addEventListener('click', function () {
+      liShowOnMap.addEventListener('click', function () {
         mapDiv.innerHTML = "";
         const map = mapWrapper.newMap(mapDiv, {lat: 55.9469, lng: -3.2015}, 2);
         directionsWrapper.calculateAndDisplayRoute(map, route.start, route.end);
