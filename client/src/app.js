@@ -12,9 +12,7 @@ const app = function() {
 	listViewButton.addEventListener('click', displayRoutes);
 
 	const aboutButton = document.querySelector('#about');
-	aboutButton.addEventListener('click', function() {
-		console.log('clicked');
-	});
+	aboutButton.addEventListener('click', aboutFunction);
 
 	const exploreButton = document.querySelector('#explore');
 	exploreButton.addEventListener('click', exploreFunction);
@@ -256,5 +254,22 @@ const exploreFunction = function () {
 	const map = mapWrapper.newMap(container, center, 19);
 
 };
+
+const aboutFunction = function () {
+	const container = document.querySelector('#container');
+	const homeForm = document.querySelector('#home-form');
+
+	container.classList.remove("list-contain");
+	container.classList.add("container");
+
+	if (container.innerHTML !== "") {
+		container.innerHTML = "";
+	}
+	if (homeForm.innerHTML !== "") {
+		homeForm.innerHTML = "";
+	}
+
+	container.innerText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+}
 
 document.addEventListener('DOMContentLoaded', app);
