@@ -3,6 +3,7 @@ const MapWrapper = require('./views/mapWrapper.js');
 const AutoComplete = require('./views/autoCompleteWrapper.js');
 const DirectionsWrapper = require('./views/directionsWrapper.js');
 const Route = require('./models/route.js');
+
 const app = function() {
 
 	const homeButton = document.querySelector('#home');
@@ -12,15 +13,12 @@ const app = function() {
 	listViewButton.addEventListener('click', displayRoutes);
 
 	const aboutButton = document.querySelector('#about');
-	aboutButton.addEventListener('click', function() {
-		console.log('clicked');
-	});
+	aboutButton.addEventListener('click', aboutFunction);
 
 	const exploreButton = document.querySelector('#explore');
 	exploreButton.addEventListener('click', exploreFunction);
 
 	console.log('END OF APP');
-
 }
 
 const homeFunction = function () {
@@ -48,19 +46,13 @@ const homeFunction = function () {
 	destinationInput.id = "destination-input"
 	const feildLabel = document.createElement('label');
 	feildLabel.innerText = 'Destination';
-	// feildLabel.id = 'destination-input';
 	const locationLabel = document.createElement('label');
 	locationLabel.innerText = 'From My Location';
-	// locationLabel.id = 'destination-label';
-	const checkBox = document.createElement('input');
-	checkBox.type = 'checkbox';
+
 	homeForm.appendChild(feildLabel);
 	destinationInput.disabled = true;
 	destinationInput.placeholder = 'Fetching location';
 	homeForm.appendChild(destinationInput);
-	// homeForm.appendChild(lineBreak);
-	// container.appendChild(locationLabel);
-	// container.appendChild(checkBox);
 	const mapWrapper = new MapWrapper();
 	mapWrapper.geoLocate(function(geoLocation){
 		destinationInput.disabled = false;
@@ -68,19 +60,11 @@ const homeFunction = function () {
 		autoComplete.autoCompleteBox(destinationInput, geoLocation);
 	});
 
-
 	const goButton = document.createElement('button');
 	goButton.className = 'hvr-underline-from-center';
 
 	goButton.innerText = 'Go';
 	container.appendChild(goButton);
-
-	checkBox.removeEventListener('click', function() {
-		console.log('checked')
-	});
-	checkBox.addEventListener('click', function() {
-		console.log('checked');
-	});
 
 	goButton.removeEventListener('click', goButtonFunction);
 	goButton.addEventListener('click', goButtonFunction);
@@ -94,8 +78,6 @@ const saveButtonFunction = function () {
 	saveButton.addEventListener('click', saveRouteFunction);
 }
 
-
-
 const goButtonFunction = function () {
 	const directionsWrapper = new DirectionsWrapper();
 	const mapWrapper = new MapWrapper();
@@ -106,37 +88,25 @@ const goButtonFunction = function () {
 		directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
 	});
 
-	console.log('new save function hit');
   const saveButton = document.createElement('button');
   saveButton.innerText = "Save";
 	saveButton.id="save-button"
   const form = document.querySelector('#save-location');
   form.appendChild(saveButton);
 	saveButton.addEventListener('click', saveRouteFunction);
-
-	// const saveRouteButton = document.querySelector('#save-route');
-	// saveRouteButton.removeEventListener('click', saveRouteFunction);
-	// saveRouteButton.addEventListener('click', saveRouteFunction);
 };
 
-const updateButton = function () {
-
-}
-
 const saveRouteFunction = function () {
-	console.log('update hit');
 	const saveButton = document.querySelector('#save-button');
 	saveButton.className="hvr-icon-bounce";
 	saveButton.innerText= "saved";
 	saveButton.disabled = true;
-	console.log('saving');
 	const mapWrapper = new MapWrapper();
 	const destinationInput = document.querySelector('#destination-input');
 	const finish = destinationInput.value;
 	mapWrapper.geoLocate(function(geoLocation){
 		const lat = geoLocation.lat;
 		const lng = geoLocation.lng;
-		console.log(geoLocation);
 		const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAobv2IGaN5L5BmVSJAVtsuAaK2MXL9mic`
 		const addressRequest = new Request(url)
 		addressRequest.get(function(address) {
@@ -215,7 +185,6 @@ const displayRoutes = function () {
 			});
 			const doneFunction = function () {
 				route.done = !route.done;
-				console.log(route);
 				const request = new Request(`http://localhost:3000/api/routes/${route._id}`)
 				request.put(function(updatedEntity) {
 				}, {done: route.done});
@@ -256,5 +225,22 @@ const exploreFunction = function () {
 	const map = mapWrapper.newMap(container, center, 19);
 
 };
+
+const aboutFunction = function () {
+	const container = document.querySelector('#container');
+	const homeForm = document.querySelector('#home-form');
+
+	container.classList.remove("list-contain");
+	container.classList.add("container");
+
+	if (container.innerHTML !== "") {
+		container.innerHTML = "";
+	}
+	if (homeForm.innerHTML !== "") {
+		homeForm.innerHTML = "";
+	}
+
+	container.innerText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+}
 
 document.addEventListener('DOMContentLoaded', app);

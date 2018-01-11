@@ -6,19 +6,6 @@ const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
-/*
-  const blah = db.collection('blah');
-
-  if(req.params.title === '') {
-    res.status(400)
-    res.send()
-  }
-
-  blah.update({_id: new ObjectID(req.params.id)}, {$set: { done: req.params.completed }}, function(err, success) {
-
-  })
-*/
-
 server.use(express.static('client/build'));
 server.use(parser.urlencoded({extended:true}));
 server.use(parser.json());
@@ -42,7 +29,6 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
         res.send();
         return;
       }
-
       console.log('Saved to database');
       res.status(201);
       res.json(result.ops[0]);
@@ -58,15 +44,11 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
         res.send();
         return;
       }
-
       res.json(result);
     });
-
   });
 
-
   server.delete('/api/routes', function(req, res) {
-
     db.collection('fav_routes').remove({}, function(err, result) {
       if(err) {
         console.log(err);
@@ -74,7 +56,6 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
         res.send();
         return;
       }
-
       res.status(204);
       res.send();
     });
@@ -88,16 +69,12 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
         res.send();
         return;
       }
-
       res.status(204);
       res.send();
     });
   });
 
   server.put('/api/routes/:id', function(req, res) {
-
-		//do validation
-		//return 400 if object is not valid
     db.collection('fav_routes').update({_id: new ObjectID(req.params.id)}, {$set: req.body}, function(err, success) {
       if(err) {
         console.log(err);
@@ -109,10 +86,6 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
       res.send();
     });
   });
-
-
-
-
 
   server.listen(3000, function(){
     console.log("Listening on port 3000");

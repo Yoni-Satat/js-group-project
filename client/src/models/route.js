@@ -4,8 +4,4 @@ const Route = function(start, end, done) {
   this.done = done;
 };
 
-Route.prototype.toggleDone = function() {
-  this.done = !this.done;
-};
-
 module.exports = Route;

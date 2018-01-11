@@ -11,29 +11,29 @@ MapWrapper.prototype.newMap = function (container, coords, zoom) {
 }
 
 MapWrapper.prototype.addMarker = function (coords) {
-	const marker = new google.maps.Marker({
-		position: coords,
-		map: this.googleMap,
-		animation: google.maps.Animation.DROP
-	});
-	return marker;
+  var marker = new google.maps.Marker({
+    position: coords,
+    map: this.googleMap,
+    animation: google.maps.Animation.DROP
+  });
+  return marker;
 }
 
 MapWrapper.prototype.addClickEvent = function () {
-	google.maps.event.addListener(this.googleMap, 'click', function (event) {
-		const position = { lat: event.latLng.lat(), lng: event.latLng.lng() }
-		this.addMarker(position);
-	}.bind(this));
+  google.maps.event.addListener(this.googleMap, 'click', function (event) {
+    var position = { lat: event.latLng.lat(), lng: event.latLng.lng() }
+    this.addMarker(position);
+  }.bind(this));
 }
 
 MapWrapper.prototype.addInfoWindow = function (coords, text) {
-	const marker = this.addMarker(coords);
-	marker.addListener('click', function () {
-		const infoWindow = new google.maps.InfoWindow({
-			content: text
-		});
-		infoWindow.open(this.map, marker);
-	});
+  var marker = this.addMarker(coords);
+  marker.addListener('click', function () {
+    var infoWindow = new google.maps.InfoWindow({
+      content: text
+    });
+    infoWindow.open(this.map, marker);
+  });
 }
 
 MapWrapper.prototype.geoLocate = function (callback) {
@@ -45,8 +45,6 @@ MapWrapper.prototype.geoLocate = function (callback) {
 		};
 
 		callback(center);
-		// this.googleMap.setCenter(center);
-		// this.addMarker(center);
 	});
 }
 
