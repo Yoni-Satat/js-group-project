@@ -4,10 +4,7 @@ const server = express();
 const path = require('path');
 
 const MongoClient = require('mongodb').MongoClient;
-<<<<<<< HEAD
 const ObjectID = require('mongodb').ObjectID;
-=======
->>>>>>> 9fc4a58d58c3bbec254c81b9dc1dfe8b31447b1d
 
 server.use(express.static('client/build'));
 server.use(parser.urlencoded({extended:true}));
@@ -62,7 +59,6 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
       res.status(204);
       res.send();
     });
-<<<<<<< HEAD
   });
 
   server.delete('/api/routes/:id', function(req, res) {
@@ -91,15 +87,6 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
     });
   });
 
-
-
-
-
-=======
-
-  });
-
->>>>>>> 9fc4a58d58c3bbec254c81b9dc1dfe8b31447b1d
   server.listen(3000, function(){
     console.log("Listening on port 3000");
   });
