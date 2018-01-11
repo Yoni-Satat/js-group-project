@@ -50,8 +50,7 @@ const homeFunction = function () {
 	const locationLabel = document.createElement('label');
 	locationLabel.innerText = 'From My Location';
 	// locationLabel.id = 'destination-label';
-	const checkBox = document.createElement('input');
-	checkBox.type = 'checkbox';
+
 	homeForm.appendChild(feildLabel);
 	destinationInput.disabled = true;
 	destinationInput.placeholder = 'Fetching location';
@@ -72,13 +71,6 @@ const homeFunction = function () {
 
 	goButton.innerText = 'Go';
 	container.appendChild(goButton);
-
-	checkBox.removeEventListener('click', function() {
-		console.log('checked')
-	});
-	checkBox.addEventListener('click', function() {
-		console.log('checked');
-	});
 
 	goButton.removeEventListener('click', goButtonFunction);
 	goButton.addEventListener('click', goButtonFunction);
@@ -104,7 +96,6 @@ const goButtonFunction = function () {
 		directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
 	});
 
-	console.log('new save function hit');
   const saveButton = document.createElement('button');
   saveButton.innerText = "Save";
 	saveButton.id="save-button"
@@ -117,24 +108,17 @@ const goButtonFunction = function () {
 	// saveRouteButton.addEventListener('click', saveRouteFunction);
 };
 
-const updateButton = function () {
-
-}
-
 const saveRouteFunction = function () {
-	console.log('update hit');
 	const saveButton = document.querySelector('#save-button');
 	saveButton.className="hvr-icon-bounce";
 	saveButton.innerText= "saved";
 	saveButton.disabled = true;
-	console.log('saving');
 	const mapWrapper = new MapWrapper();
 	const destinationInput = document.querySelector('#destination-input');
 	const finish = destinationInput.value;
 	mapWrapper.geoLocate(function(geoLocation){
 		const lat = geoLocation.lat;
 		const lng = geoLocation.lng;
-		console.log(geoLocation);
 		const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAobv2IGaN5L5BmVSJAVtsuAaK2MXL9mic`
 		const addressRequest = new Request(url)
 		addressRequest.get(function(address) {
@@ -213,7 +197,6 @@ const displayRoutes = function () {
 			});
 			const doneFunction = function () {
 				route.done = !route.done;
-				console.log(route);
 				const request = new Request(`http://localhost:3000/api/routes/${route._id}`)
 				request.put(function(updatedEntity) {
 				}, {done: route.done});
