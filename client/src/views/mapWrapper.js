@@ -47,3 +47,5 @@ MapWrapper.prototype.geoLocate = function (callback) {
 		callback(center);
 	});
 }
+
+module.exports = MapWrapper;
