@@ -145,6 +145,7 @@ const displayRoutes = function () {
 	const request = new Request('http://localhost:3000/api/routes');
 
 	request.get(function(savedRoutes) {
+		savedRoutes.reverse();
 		savedRoutes.forEach(function(route) {
 			const ulDisplayRoutes = document.createElement('ul');
 			const liStart = document.createElement('li');
