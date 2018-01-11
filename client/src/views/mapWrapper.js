@@ -1,8 +1,13 @@
-var MapWrapper = function (container, coords, zoom) {
-  this.googleMap = new google.maps.Map(container, {
-    center: coords,
-    zoom: zoom
-  });
+const MapWrapper = function () {
+
+}
+
+MapWrapper.prototype.newMap = function (container, coords, zoom) {
+	const map = new google.maps.Map(container, {
+		center: coords,
+		zoom: zoom
+	});
+	return map;
 }
 
 MapWrapper.prototype.addMarker = function (coords) {
@@ -31,10 +36,16 @@ MapWrapper.prototype.addInfoWindow = function (coords, text) {
   });
 }
 
-MapWrapper.prototype.geoLocate = function () {
-  navigator.geolocation.getCurrentPosition(function (position) {
-    var center = { lat: position.coords.latitude, lng: position.coords.longitude };
-    this.googleMap.setCenter(center);
-    this.addMarker(center);
-  }.bind(this));
+MapWrapper.prototype.geoLocate = function (callback) {
+	navigator.geolocation.getCurrentPosition(function (position) {
+
+		const center = {
+			lat: position.coords.latitude,
+			lng: position.coords.longitude
+		};
+
+		callback(center);
+	});
 }
+
+module.exports = MapWrapper;

@@ -11,7 +11,6 @@ Request.prototype.get = function(callback) {
       return;
     };
     this.responseBody = JSON.parse(this.responseText);
-    console.log("responseBody", this.responseBody);
     callback(this.responseBody);
   });
   request.send();
@@ -30,6 +29,19 @@ Request.prototype.post = function(callback, body) {
     callback(responseBody);
   });
   request.send(JSON.stringify(body));
+};
+
+Request.prototype.put = function(callback, body) {
+	const request = new XMLHttpRequest();
+	request.open('PUT', this.url);
+	request.setRequestHeader('Content-Type', 'application/json');
+	request.addEventListener('load', function() {
+		if(this.status!==204) {
+				return;
+		};
+		callback();
+	});
+	request.send(JSON.stringify(body));
 };
 
 Request.prototype.delete = function(callback) {

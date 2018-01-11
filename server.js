@@ -4,6 +4,7 @@ const server = express();
 const path = require('path');
 
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 
 server.use(express.static('client/build'));
 server.use(parser.urlencoded({extended:true}));
@@ -28,7 +29,6 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
         res.send();
         return;
       }
-
       console.log('Saved to database');
       res.status(201);
       res.json(result.ops[0]);
@@ -44,15 +44,11 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
         res.send();
         return;
       }
-
       res.json(result);
     });
-
   });
 
-
   server.delete('/api/routes', function(req, res) {
-
     db.collection('fav_routes').remove({}, function(err, result) {
       if(err) {
         console.log(err);
@@ -60,11 +56,35 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
         res.send();
         return;
       }
-
       res.status(204);
       res.send();
     });
+  });
 
+  server.delete('/api/routes/:id', function(req, res) {
+    db.collection('fav_routes').deleteOne({_id: new ObjectID(req.params.id)}, function(err, success) {
+      if(err) {
+        console.log(err);
+        res.status(500);
+        res.send();
+        return;
+      }
+      res.status(204);
+      res.send();
+    });
+  });
+
+  server.put('/api/routes/:id', function(req, res) {
+    db.collection('fav_routes').update({_id: new ObjectID(req.params.id)}, {$set: req.body}, function(err, success) {
+      if(err) {
+        console.log(err);
+        res.status(500);
+        res.send();
+        return;
+      }
+      res.status(204);
+      res.send();
+    });
   });
 
   server.listen(3000, function(){
