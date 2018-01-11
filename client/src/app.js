@@ -3,6 +3,7 @@ const MapWrapper = require('./views/mapWrapper.js');
 const AutoComplete = require('./views/autoCompleteWrapper.js');
 const DirectionsWrapper = require('./views/directionsWrapper.js');
 const Route = require('./models/route.js');
+
 const app = function() {
 
 	const homeButton = document.querySelector('#home');
@@ -18,7 +19,6 @@ const app = function() {
 	exploreButton.addEventListener('click', exploreFunction);
 
 	console.log('END OF APP');
-
 }
 
 const homeFunction = function () {
@@ -46,25 +46,19 @@ const homeFunction = function () {
 	destinationInput.id = "destination-input"
 	const feildLabel = document.createElement('label');
 	feildLabel.innerText = 'Destination';
-	// feildLabel.id = 'destination-input';
 	const locationLabel = document.createElement('label');
 	locationLabel.innerText = 'From My Location';
-	// locationLabel.id = 'destination-label';
 
 	homeForm.appendChild(feildLabel);
 	destinationInput.disabled = true;
 	destinationInput.placeholder = 'Fetching location';
 	homeForm.appendChild(destinationInput);
-	// homeForm.appendChild(lineBreak);
-	// container.appendChild(locationLabel);
-	// container.appendChild(checkBox);
 	const mapWrapper = new MapWrapper();
 	mapWrapper.geoLocate(function(geoLocation){
 		destinationInput.disabled = false;
 		destinationInput.placeholder = 'Enter a location';
 		autoComplete.autoCompleteBox(destinationInput, geoLocation);
 	});
-
 
 	const goButton = document.createElement('button');
 	goButton.className = 'hvr-underline-from-center';
@@ -84,8 +78,6 @@ const saveButtonFunction = function () {
 	saveButton.addEventListener('click', saveRouteFunction);
 }
 
-
-
 const goButtonFunction = function () {
 	const directionsWrapper = new DirectionsWrapper();
 	const mapWrapper = new MapWrapper();
@@ -102,10 +94,6 @@ const goButtonFunction = function () {
   const form = document.querySelector('#save-location');
   form.appendChild(saveButton);
 	saveButton.addEventListener('click', saveRouteFunction);
-
-	// const saveRouteButton = document.querySelector('#save-route');
-	// saveRouteButton.removeEventListener('click', saveRouteFunction);
-	// saveRouteButton.addEventListener('click', saveRouteFunction);
 };
 
 const saveRouteFunction = function () {

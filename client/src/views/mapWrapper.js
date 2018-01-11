@@ -45,7 +45,5 @@ MapWrapper.prototype.geoLocate = function (callback) {
 		};
 
 		callback(center);
-		// this.googleMap.setCenter(center);
-		// this.addMarker(center);
 	});
 }
