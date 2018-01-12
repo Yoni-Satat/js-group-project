@@ -1,12 +1,11 @@
 const MapWrapper = require('../models/mapWrapper.js');
+const mapWrapper = new MapWrapper();
 
 const Explore = function () {
 
 }
 
 Explore.prototype.exploreFunction = function () {
-
-	const mapWrapper = new MapWrapper();
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
 	const form = document.querySelector('#save-location');
@@ -26,35 +25,34 @@ Explore.prototype.exploreFunction = function () {
 	let center = ""
 	if (coords) {
 		center = JSON.parse(coords);
+		createMap(container, center);
 	} else {
 		mapWrapper.geoLocate(function(geoLocation){
 			localStorage = window.localStorage;
 			const jsonCoords = JSON.stringify(geoLocation);
 			localStorage.setItem('geoLocation', jsonCoords);
+			createMap(container, geoLocation);
 		})
-		center = {
-			"lat": 55.9289661,
-			"lng": -3.2088511
-		}
-	}
-
-	const map = mapWrapper.newMap(container, center, 13);
-
-	if (coords) {
-		const marker = new google.maps.Marker({
-			position: center,
-			map: map
-		});
-
-		const infowindow = new google.maps.InfoWindow({
-			content: "You are here!"
-		});
-
-		marker.setMap(map);
-
-		infowindow.open(map, marker);
 	}
 
 };
+
+const createMap = function (container, center) {
+	const map = mapWrapper.newMap(container, center, 13);
+
+	const marker = new google.maps.Marker({
+		position: center,
+		map: map
+	});
+
+	const infowindow = new google.maps.InfoWindow({
+		content: "You are here!"
+	});
+
+	marker.setMap(map);
+
+	infowindow.open(map, marker);
+
+}
 
 module.exports = Explore;
