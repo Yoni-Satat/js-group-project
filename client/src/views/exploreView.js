@@ -22,11 +22,32 @@ Explore.prototype.exploreFunction = function () {
 		homeForm.innerHTML = "";
 	}
 
-	const center = {
-		lat: 55.946962,
-		lng: -3.20195
+	const coords = localStorage.getItem('geoLocation');
+	let center = ""
+	if (coords) {
+		center = JSON.parse(coords);
+	} else {
+		center = {
+			"lat": 46.32118,
+			"lng": -5.3891737
+		}
+		console.log('doesnt');
 	}
-	const map = mapWrapper.newMap(container, center, 19);
+
+	const map = mapWrapper.newMap(container, center, 15);
+
+	const marker = new google.maps.Marker({
+	position: center,
+	map: map
+	});
+
+	const infowindow = new google.maps.InfoWindow({
+	content: "You are here!"
+	});
+
+	marker.setMap(map);
+
+	infowindow.open(map, marker);
 
 };
 
