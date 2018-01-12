@@ -16,16 +16,16 @@ Explore.prototype.exploreFunction = function () {
 	container.classList.remove("list-contain");
 	container.classList.add("container");
 
-	const coords = localStorage.getItem('geoLocation');
+	const coords = sessionStorage.getItem('geoLocation');
 	let center = ""
 	if (coords) {
 		center = JSON.parse(coords);
 		createMap(container, center);
 	} else {
 		mapWrapper.geoLocate(function(geoLocation){
-			localStorage = window.localStorage;
+			sessionStorage = window.sessionStorage;
 			const jsonCoords = JSON.stringify(geoLocation);
-			localStorage.setItem('geoLocation', jsonCoords);
+			sessionStorage.setItem('geoLocation', jsonCoords);
 			createMap(container, geoLocation);
 		})
 	}

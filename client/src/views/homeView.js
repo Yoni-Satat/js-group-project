@@ -46,7 +46,7 @@ Home.prototype.homeFunction = function () {
 	goButton.disabled = true;
 	container.appendChild(goButton);
 
-	const coords = localStorage.getItem('geoLocation');
+	const coords = sessionStorage.getItem('geoLocation');
 	if (coords) {
 		const geoLocation = JSON.parse(coords);
 		autoComplete.autoCompleteBox(destinationInput, geoLocation);
@@ -59,9 +59,9 @@ Home.prototype.homeFunction = function () {
 			goButton.disabled = false;
 			destinationInput.placeholder = 'Enter a destination';
 			autoComplete.autoCompleteBox(destinationInput, geoLocation);
-			localStorage = window.localStorage;
+			sessionStorage = window.sessionStorage;
 			const jsonCoords = JSON.stringify(geoLocation);
-			localStorage.setItem('geoLocation', jsonCoords);
+			sessionStorage.setItem('geoLocation', jsonCoords);
 		})
 	};
 
@@ -77,7 +77,7 @@ const goButtonFunction = function () {
 	} else {
 		const finish = destinationInput.value;
 
-		const coords = localStorage.getItem('geoLocation');
+		const coords = sessionStorage.getItem('geoLocation');
 		const geoLocation = JSON.parse(coords);
 
 		const map = mapWrapper.newMap(container, geoLocation, 7);
@@ -107,7 +107,7 @@ const saveRouteFunction = function () {
 	const destinationInput = document.querySelector('#destination-input');
 	const finish = destinationInput.value;
 
-	const coords = localStorage.getItem('geoLocation');
+	const coords = sessionStorage.getItem('geoLocation');
 	const geoLocation = JSON.parse(coords);
 	const lat = geoLocation.lat;
 	const lng = geoLocation.lng;
