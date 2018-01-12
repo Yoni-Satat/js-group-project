@@ -6,7 +6,7 @@ const ListRoutes = function () {
 
 }
 
-ListRoutes.prototype.displayRoutes = function () {
+ListRoutes.prototype.displayRoutes = function display () {
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
 	const form = document.querySelector('#save-location');
@@ -68,7 +68,7 @@ ListRoutes.prototype.displayRoutes = function () {
 				const request = new Request(url);
 				request.delete(function(deletedEntity) {
 				}, route);
-				displayRoutes();
+				display();
 			});
 			const doneFunction = function () {
 				route.done = !route.done;
