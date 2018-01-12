@@ -40,15 +40,25 @@ Home.prototype.homeFunction = function () {
 	destinationInput.disabled = true;
 	destinationInput.placeholder = 'Fetching location';
 	homeForm.appendChild(destinationInput);
+
+	const goButton = document.createElement('button');
+	goButton.id = 'go-button';
+	goButton.className = 'hvr-underline-from-center';
+	goButton.innerText = 'Go';
+	goButton.disabled = true;
+	container.appendChild(goButton);
+
 	const coords = localStorage.getItem('geoLocation');
 	if (coords) {
 		const geoLocation = JSON.parse(coords);
 		autoComplete.autoCompleteBox(destinationInput, geoLocation);
 		destinationInput.disabled = false;
+		goButton.disabled = false;
 		destinationInput.placeholder = 'Enter a location';
 	} else {
 		mapWrapper.geoLocate(function(geoLocation){
 			destinationInput.disabled = false;
+			goButton.disabled = false;
 			destinationInput.placeholder = 'Enter a location';
 			autoComplete.autoCompleteBox(destinationInput, geoLocation);
 			localStorage = window.localStorage;
@@ -57,11 +67,6 @@ Home.prototype.homeFunction = function () {
 		})
 	};
 
-	const goButton = document.createElement('button');
-	goButton.className = 'hvr-underline-from-center';
-
-	goButton.innerText = 'Go';
-	container.appendChild(goButton);
 	goButton.removeEventListener('click', goButtonFunction);
 	goButton.addEventListener('click', goButtonFunction);
 }
