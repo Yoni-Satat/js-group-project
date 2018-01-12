@@ -10,13 +10,10 @@ ListRoutes.prototype.displayRoutes = function display () {
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
 	const form = document.querySelector('#save-location');
+	container.innerHTML = "";
+	homeForm.innerHTML = "";
 	form.innerHTML = "";
-	if (container.innerHTML !== "") {
-		container.innerHTML = "";
-	}
-	if (homeForm.innerHTML !== "") {
-		homeForm.innerHTML = "";
-	}
+	
 	container.classList.remove("container");
 	container.classList.add("list-contain");
 

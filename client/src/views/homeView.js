@@ -15,13 +15,10 @@ Home.prototype.homeFunction = function () {
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
 	const form = document.querySelector('#save-location');
+	container.innerHTML = "";
+	homeForm.innerHTML = "";
 	form.innerHTML = "";
-	if (container.innerHTML !== "") {
-		container.innerHTML = "";
-	}
-	if (homeForm.innerHTML !== "") {
-		homeForm.innerHTML = "";
-	}
+
 
 	container.classList.remove("list-contain");
 	container.classList.add("container");
@@ -54,12 +51,12 @@ Home.prototype.homeFunction = function () {
 		autoComplete.autoCompleteBox(destinationInput, geoLocation);
 		destinationInput.disabled = false;
 		goButton.disabled = false;
-		destinationInput.placeholder = 'Enter a location';
+		destinationInput.placeholder = 'Enter a destination';
 	} else {
 		mapWrapper.geoLocate(function(geoLocation){
 			destinationInput.disabled = false;
 			goButton.disabled = false;
-			destinationInput.placeholder = 'Enter a location';
+			destinationInput.placeholder = 'Enter a destination';
 			autoComplete.autoCompleteBox(destinationInput, geoLocation);
 			localStorage = window.localStorage;
 			const jsonCoords = JSON.stringify(geoLocation);
@@ -73,24 +70,29 @@ Home.prototype.homeFunction = function () {
 
 const goButtonFunction = function () {
 	const destinationInput = document.querySelector('#destination-input');
-	const finish = destinationInput.value;
 
-	const coords = localStorage.getItem('geoLocation');
-	const geoLocation = JSON.parse(coords);
+	if (destinationInput.value === '') {
+		destinationInput.placeholder = 'Please select a destination'
+	} else {
+		const finish = destinationInput.value;
 
-	const map = mapWrapper.newMap(container, geoLocation, 7);
+		const coords = localStorage.getItem('geoLocation');
+		const geoLocation = JSON.parse(coords);
 
-	const directionsWrapper = new DirectionsWrapper();
-	directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
+		const map = mapWrapper.newMap(container, geoLocation, 7);
 
-	const saveButton = document.createElement('button');
-	saveButton.innerText = "Save";
-	saveButton.id="save-button"
+		const directionsWrapper = new DirectionsWrapper();
+		directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
 
-	const form = document.querySelector('#save-location');
-	form.appendChild(saveButton);
+		const saveButton = document.createElement('button');
+		saveButton.innerText = "Save";
+		saveButton.id="save-button"
 
-	saveButton.addEventListener('click', saveRouteFunction);
+		const form = document.querySelector('#save-location');
+		form.appendChild(saveButton);
+
+		saveButton.addEventListener('click', saveRouteFunction);
+	}
 };
 
 const saveRouteFunction = function () {

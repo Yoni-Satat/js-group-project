@@ -9,17 +9,12 @@ Explore.prototype.exploreFunction = function () {
 	const container = document.querySelector('#container');
 	const homeForm = document.querySelector('#home-form');
 	const form = document.querySelector('#save-location');
+	container.innerHTML = "";
+	homeForm.innerHTML = "";
 	form.innerHTML = "";
 
 	container.classList.remove("list-contain");
 	container.classList.add("container");
-
-	if (container.innerHTML !== "") {
-		container.innerHTML = "";
-	}
-	if (homeForm.innerHTML !== "") {
-		homeForm.innerHTML = "";
-	}
 
 	const coords = localStorage.getItem('geoLocation');
 	let center = ""
