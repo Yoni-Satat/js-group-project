@@ -40,11 +40,22 @@ Home.prototype.homeFunction = function () {
 	destinationInput.disabled = true;
 	destinationInput.placeholder = 'Fetching location';
 	homeForm.appendChild(destinationInput);
-	mapWrapper.geoLocate(function(geoLocation){
+	const coords = localStorage.getItem('geoLocation');
+	if (coords) {
+		const geoLocation = JSON.parse(coords);
+		autoComplete.autoCompleteBox(destinationInput, geoLocation);
 		destinationInput.disabled = false;
 		destinationInput.placeholder = 'Enter a location';
-		autoComplete.autoCompleteBox(destinationInput, geoLocation);
-	});
+	} else {
+		mapWrapper.geoLocate(function(geoLocation){
+			destinationInput.disabled = false;
+			destinationInput.placeholder = 'Enter a location';
+			autoComplete.autoCompleteBox(destinationInput, geoLocation);
+			localStorage = window.localStorage;
+			const jsonCoords = JSON.stringify(geoLocation);
+			localStorage.setItem('geoLocation', jsonCoords);
+		})
+	};
 
 	const goButton = document.createElement('button');
 	goButton.className = 'hvr-underline-from-center';
@@ -56,19 +67,24 @@ Home.prototype.homeFunction = function () {
 }
 
 const goButtonFunction = function () {
-	const directionsWrapper = new DirectionsWrapper();
 	const destinationInput = document.querySelector('#destination-input');
 	const finish = destinationInput.value;
-	mapWrapper.geoLocate(function(geoLocation){
-		const map = mapWrapper.newMap(container, geoLocation, 7);
-		directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
-	});
 
-  const saveButton = document.createElement('button');
-  saveButton.innerText = "Save";
+	const coords = localStorage.getItem('geoLocation');
+	const geoLocation = JSON.parse(coords);
+
+	const map = mapWrapper.newMap(container, geoLocation, 7);
+
+	const directionsWrapper = new DirectionsWrapper();
+	directionsWrapper.calculateAndDisplayRoute(map, geoLocation, finish);
+
+	const saveButton = document.createElement('button');
+	saveButton.innerText = "Save";
 	saveButton.id="save-button"
-  const form = document.querySelector('#save-location');
-  form.appendChild(saveButton);
+
+	const form = document.querySelector('#save-location');
+	form.appendChild(saveButton);
+
 	saveButton.addEventListener('click', saveRouteFunction);
 };
 
@@ -79,20 +95,22 @@ const saveRouteFunction = function () {
 	saveButton.disabled = true;
 	const destinationInput = document.querySelector('#destination-input');
 	const finish = destinationInput.value;
-	mapWrapper.geoLocate(function(geoLocation){
-		const lat = geoLocation.lat;
-		const lng = geoLocation.lng;
-		const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAobv2IGaN5L5BmVSJAVtsuAaK2MXL9mic`
-		const addressRequest = new Request(url)
-		addressRequest.get(function(address) {
-			const addressDetails = address.results[0].address_components;
-			const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
-			const route = new Route(start, finish, false);
-			const request = new Request('http://localhost:3000/api/routes');
-			request.post(function(addedEntity) {
-			}, route);
-		});
+
+	const coords = localStorage.getItem('geoLocation');
+	const geoLocation = JSON.parse(coords);
+	const lat = geoLocation.lat;
+	const lng = geoLocation.lng;
+	const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAobv2IGaN5L5BmVSJAVtsuAaK2MXL9mic`
+	const addressRequest = new Request(url)
+	addressRequest.get(function(address) {
+		const addressDetails = address.results[0].address_components;
+		const start = `${addressDetails[0].long_name} ${addressDetails[1].short_name}, ${addressDetails[2].long_name}, ${addressDetails[6].long_name}`;
+		const route = new Route(start, finish, false);
+		const request = new Request('http://localhost:3000/api/routes');
+		request.post(function(addedEntity) {
+		}, route);
 	});
+
 };
 
 module.exports = Home;
