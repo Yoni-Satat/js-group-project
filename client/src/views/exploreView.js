@@ -27,27 +27,33 @@ Explore.prototype.exploreFunction = function () {
 	if (coords) {
 		center = JSON.parse(coords);
 	} else {
+		mapWrapper.geoLocate(function(geoLocation){
+			localStorage = window.localStorage;
+			const jsonCoords = JSON.stringify(geoLocation);
+			localStorage.setItem('geoLocation', jsonCoords);
+		})
 		center = {
-			"lat": 46.32118,
-			"lng": -5.3891737
+			"lat": 55.9289661,
+			"lng": -3.2088511
 		}
-		console.log('doesnt');
 	}
 
-	const map = mapWrapper.newMap(container, center, 15);
+	const map = mapWrapper.newMap(container, center, 13);
 
-	const marker = new google.maps.Marker({
-	position: center,
-	map: map
-	});
+	if (coords) {
+		const marker = new google.maps.Marker({
+			position: center,
+			map: map
+		});
 
-	const infowindow = new google.maps.InfoWindow({
-	content: "You are here!"
-	});
+		const infowindow = new google.maps.InfoWindow({
+			content: "You are here!"
+		});
 
-	marker.setMap(map);
+		marker.setMap(map);
 
-	infowindow.open(map, marker);
+		infowindow.open(map, marker);
+	}
 
 };
 
