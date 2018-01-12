@@ -5,11 +5,7 @@ describe('Route', function() {
   let route1;
 
   beforeEach(function() {
-    route1 = new Route('school', 'Edinburgh', 'Aberdeen', false);
-  });
-
-  it('should have a title', function() {
-    assert.strictEqual(route1.title, 'school');
+    route1 = new Route('Edinburgh', 'Aberdeen', false);
   });
 
   it('should have a start point', function() {
@@ -19,10 +15,5 @@ describe('Route', function() {
   it('should have a end point', function() {
     assert.strictEqual(route1.end, 'Aberdeen');
   });
-
-  it('should toggle done', function() {
-    route1.toggleDone();
-    assert.strictEqual(route1.done, true);
-  })
 
 });
