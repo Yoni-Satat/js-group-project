@@ -19,6 +19,7 @@ Home.prototype.homeFunction = function () {
 	homeForm.innerHTML = "";
 	form.innerHTML = "";
 
+	homeForm.style.visibility = "visible";
 
 	container.classList.remove("list-contain");
 	container.classList.add("container");
@@ -90,6 +91,9 @@ const goButtonFunction = function () {
 
 		const form = document.querySelector('#save-location');
 		form.appendChild(saveButton);
+
+		const homeForm = document.querySelector('#home-form');
+		homeForm.style.visibility = 'hidden';
 
 		saveButton.addEventListener('click', saveRouteFunction);
 	}
