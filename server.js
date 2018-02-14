@@ -5,12 +5,14 @@ const path = require('path');
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
+const DataURL = process.env.MONGOLAB_URI;
 
 server.use(express.static('client/build'));
 server.use(parser.urlencoded({extended:true}));
 server.use(parser.json());
 
-MongoClient.connect('mongodb://localhost:27017', function(err, client) {
+
+MongoClient.connect(DataURL, function(err, client) {
   if(err) {
     console.log(err);
     return;
